@@ -1,0 +1,44 @@
+//
+//  MainViewController.m
+//  fotowalk
+//
+//  Created by Sarp Centel on 3/6/15.
+//  Copyright (c) 2015 fotowalkers. All rights reserved.
+//
+
+#import "MainViewController.h"
+#import "MapViewController.h"
+
+@interface MainViewController ()
+- (IBAction)onClickMapButton:(id)sender;
+
+@end
+
+@implementation MainViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title = @"Fotowalk";
+    // Do any additional setup after loading the view from its nib.
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+- (IBAction)onClickMapButton:(id)sender {
+    MapViewController *mapController = [[MapViewController alloc] init];
+    [self.navigationController pushViewController:mapController animated:YES];
+}
+@end
