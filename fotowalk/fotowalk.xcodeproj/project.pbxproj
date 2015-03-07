@@ -17,6 +17,8 @@
 		D1D482FB1AAAA1FC00CA60F7 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D482F91AAAA1FC00CA60F7 /* MapViewController.m */; };
 		D1D482FC1AAAA1FC00CA60F7 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1D482FA1AAAA1FC00CA60F7 /* MapViewController.xib */; };
 		D1D482FE1AAAA32A00CA60F7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1D482FD1AAAA32A00CA60F7 /* MapKit.framework */; };
+		D1D483041AAAA74400CA60F7 /* Media.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D483031AAAA74400CA60F7 /* Media.m */; };
+		D1D483071AAAA85000CA60F7 /* FotowalkAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D483061AAAA85000CA60F7 /* FotowalkAPIClient.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,10 @@
 		D1D482F91AAAA1FC00CA60F7 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		D1D482FA1AAAA1FC00CA60F7 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		D1D482FD1AAAA32A00CA60F7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		D1D483021AAAA74400CA60F7 /* Media.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Media.h; sourceTree = "<group>"; };
+		D1D483031AAAA74400CA60F7 /* Media.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Media.m; sourceTree = "<group>"; };
+		D1D483051AAAA85000CA60F7 /* FotowalkAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FotowalkAPIClient.h; sourceTree = "<group>"; };
+		D1D483061AAAA85000CA60F7 /* FotowalkAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FotowalkAPIClient.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,16 +100,15 @@
 		24A765581AA8E66300F1CA09 /* fotowalk */ = {
 			isa = PBXGroup;
 			children = (
+				D1D483011AAAA67D00CA60F7 /* Views */,
+				D1D483001AAAA67200CA60F7 /* Models */,
+				D1D482FF1AAAA66900CA60F7 /* View Controllers */,
 				24A7655D1AA8E66300F1CA09 /* AppDelegate.h */,
 				24A7655E1AA8E66300F1CA09 /* AppDelegate.m */,
 				24A765661AA8E66300F1CA09 /* Images.xcassets */,
 				24A765591AA8E66300F1CA09 /* Supporting Files */,
-				D101C00E1AAAA0CE00791798 /* MainViewController.h */,
-				D101C00F1AAAA0CE00791798 /* MainViewController.m */,
-				D101C0101AAAA0CE00791798 /* MainViewController.xib */,
-				D1D482F81AAAA1FC00CA60F7 /* MapViewController.h */,
-				D1D482F91AAAA1FC00CA60F7 /* MapViewController.m */,
-				D1D482FA1AAAA1FC00CA60F7 /* MapViewController.xib */,
+				D1D483051AAAA85000CA60F7 /* FotowalkAPIClient.h */,
+				D1D483061AAAA85000CA60F7 /* FotowalkAPIClient.m */,
 			);
 			path = fotowalk;
 			sourceTree = "<group>";
@@ -141,6 +146,35 @@
 				096C30F378B30C140A1F465F /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		D1D482FF1AAAA66900CA60F7 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D101C00E1AAAA0CE00791798 /* MainViewController.h */,
+				D101C00F1AAAA0CE00791798 /* MainViewController.m */,
+				D101C0101AAAA0CE00791798 /* MainViewController.xib */,
+				D1D482F81AAAA1FC00CA60F7 /* MapViewController.h */,
+				D1D482F91AAAA1FC00CA60F7 /* MapViewController.m */,
+				D1D482FA1AAAA1FC00CA60F7 /* MapViewController.xib */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		D1D483001AAAA67200CA60F7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D1D483021AAAA74400CA60F7 /* Media.h */,
+				D1D483031AAAA74400CA60F7 /* Media.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		D1D483011AAAA67D00CA60F7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		F63372A91C5C7869D3203854 /* Frameworks */ = {
@@ -288,6 +322,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				24A7655F1AA8E66300F1CA09 /* AppDelegate.m in Sources */,
+				D1D483041AAAA74400CA60F7 /* Media.m in Sources */,
+				D1D483071AAAA85000CA60F7 /* FotowalkAPIClient.m in Sources */,
 				D101C0111AAAA0CE00791798 /* MainViewController.m in Sources */,
 				24A7655C1AA8E66300F1CA09 /* main.m in Sources */,
 				D1D482FB1AAAA1FC00CA60F7 /* MapViewController.m in Sources */,
