@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 #import "MapViewController.h"
+#import "PhotoWalkDetailsViewController.h"
 
 @interface MainViewController ()
 - (IBAction)onClickMapButton:(id)sender;
@@ -29,4 +30,11 @@
     MapViewController *mapController = [[MapViewController alloc] init];
     [self.navigationController pushViewController:mapController animated:YES];
 }
+
+- (IBAction)onMissionWalk:(id)sender {
+    PhotoWalkDetailsViewController *detailsController = [[PhotoWalkDetailsViewController alloc] init];
+    detailsController.photoWalk = [PhotoWalk defaultPhotoWalk];
+    [self.navigationController pushViewController:detailsController animated:YES];
+}
+
 @end

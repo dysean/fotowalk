@@ -15,6 +15,7 @@
 @property(strong, nonatomic) NSString *text;
 @property(assign, nonatomic) CLLocationCoordinate2D location;
 @property(strong, nonatomic) NSString *place;
+@property(strong, nonatomic) NSString *url;
 
 - (id) initWithDictionary: (NSDictionary *)dictionary;
 + (NSArray *) mediaWithArray:(NSArray *) array;

@@ -11,6 +11,11 @@
 		24A7655F1AA8E66300F1CA09 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A7655E1AA8E66300F1CA09 /* AppDelegate.m */; };
 		24A765671AA8E66300F1CA09 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24A765661AA8E66300F1CA09 /* Images.xcassets */; };
 		24A765761AA8E66300F1CA09 /* fotowalkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A765751AA8E66300F1CA09 /* fotowalkTests.m */; };
+		826F2D6A1AAAC35600B3B9AE /* PhotoWalkDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 826F2D681AAAC35600B3B9AE /* PhotoWalkDetailsViewController.m */; };
+		826F2D6B1AAAC35600B3B9AE /* PhotoWalkDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 826F2D691AAAC35600B3B9AE /* PhotoWalkDetailsViewController.xib */; };
+		826F2D6E1AAAC59000B3B9AE /* PhotoWalk.m in Sources */ = {isa = PBXBuildFile; fileRef = 826F2D6D1AAAC59000B3B9AE /* PhotoWalk.m */; };
+		826F2D711AAAC5D800B3B9AE /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 826F2D701AAAC5D800B3B9AE /* Location.m */; };
+		826F2D741AAAD6AF00B3B9AE /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 826F2D731AAAD6AF00B3B9AE /* LocationManager.m */; };
 		C1D993A8BCE6120C980319B0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB4EA72D39201F4874500D35 /* libPods.a */; };
 		D101C0111AAAA0CE00791798 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D101C00F1AAAA0CE00791798 /* MainViewController.m */; };
 		D101C0121AAAA0CE00791798 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D101C0101AAAA0CE00791798 /* MainViewController.xib */; };
@@ -42,6 +47,15 @@
 		24A7656F1AA8E66300F1CA09 /* fotowalkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fotowalkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		24A765741AA8E66300F1CA09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24A765751AA8E66300F1CA09 /* fotowalkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = fotowalkTests.m; sourceTree = "<group>"; };
+		826F2D671AAAC35600B3B9AE /* PhotoWalkDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWalkDetailsViewController.h; sourceTree = "<group>"; };
+		826F2D681AAAC35600B3B9AE /* PhotoWalkDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWalkDetailsViewController.m; sourceTree = "<group>"; };
+		826F2D691AAAC35600B3B9AE /* PhotoWalkDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoWalkDetailsViewController.xib; sourceTree = "<group>"; };
+		826F2D6C1AAAC59000B3B9AE /* PhotoWalk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWalk.h; sourceTree = "<group>"; };
+		826F2D6D1AAAC59000B3B9AE /* PhotoWalk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWalk.m; sourceTree = "<group>"; };
+		826F2D6F1AAAC5D800B3B9AE /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		826F2D701AAAC5D800B3B9AE /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		826F2D721AAAD6AF00B3B9AE /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		826F2D731AAAD6AF00B3B9AE /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		BB4EA72D39201F4874500D35 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC0FBB805BBAE03F57C4B74B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D101C00E1AAAA0CE00791798 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -109,6 +123,8 @@
 				24A765591AA8E66300F1CA09 /* Supporting Files */,
 				D1D483051AAAA85000CA60F7 /* FotowalkAPIClient.h */,
 				D1D483061AAAA85000CA60F7 /* FotowalkAPIClient.m */,
+				826F2D721AAAD6AF00B3B9AE /* LocationManager.h */,
+				826F2D731AAAD6AF00B3B9AE /* LocationManager.m */,
 			);
 			path = fotowalk;
 			sourceTree = "<group>";
@@ -157,6 +173,9 @@
 				D1D482F81AAAA1FC00CA60F7 /* MapViewController.h */,
 				D1D482F91AAAA1FC00CA60F7 /* MapViewController.m */,
 				D1D482FA1AAAA1FC00CA60F7 /* MapViewController.xib */,
+				826F2D671AAAC35600B3B9AE /* PhotoWalkDetailsViewController.h */,
+				826F2D681AAAC35600B3B9AE /* PhotoWalkDetailsViewController.m */,
+				826F2D691AAAC35600B3B9AE /* PhotoWalkDetailsViewController.xib */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -166,6 +185,10 @@
 			children = (
 				D1D483021AAAA74400CA60F7 /* Media.h */,
 				D1D483031AAAA74400CA60F7 /* Media.m */,
+				826F2D6C1AAAC59000B3B9AE /* PhotoWalk.h */,
+				826F2D6D1AAAC59000B3B9AE /* PhotoWalk.m */,
+				826F2D6F1AAAC5D800B3B9AE /* Location.h */,
+				826F2D701AAAC5D800B3B9AE /* Location.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -269,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D101C0121AAAA0CE00791798 /* MainViewController.xib in Resources */,
+				826F2D6B1AAAC35600B3B9AE /* PhotoWalkDetailsViewController.xib in Resources */,
 				D1D482FC1AAAA1FC00CA60F7 /* MapViewController.xib in Resources */,
 				24A765671AA8E66300F1CA09 /* Images.xcassets in Resources */,
 			);
@@ -325,8 +349,12 @@
 				D1D483041AAAA74400CA60F7 /* Media.m in Sources */,
 				D1D483071AAAA85000CA60F7 /* FotowalkAPIClient.m in Sources */,
 				D101C0111AAAA0CE00791798 /* MainViewController.m in Sources */,
+				826F2D711AAAC5D800B3B9AE /* Location.m in Sources */,
 				24A7655C1AA8E66300F1CA09 /* main.m in Sources */,
+				826F2D741AAAD6AF00B3B9AE /* LocationManager.m in Sources */,
 				D1D482FB1AAAA1FC00CA60F7 /* MapViewController.m in Sources */,
+				826F2D6A1AAAC35600B3B9AE /* PhotoWalkDetailsViewController.m in Sources */,
+				826F2D6E1AAAC59000B3B9AE /* PhotoWalk.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
