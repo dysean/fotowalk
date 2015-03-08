@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		24194C341AACE345002E5863 /* PhotoWalkTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24194C321AACE345002E5863 /* PhotoWalkTableViewCell.m */; };
+		24194C351AACE345002E5863 /* PhotoWalkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24194C331AACE345002E5863 /* PhotoWalkTableViewCell.xib */; };
 		24A7655C1AA8E66300F1CA09 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A7655B1AA8E66300F1CA09 /* main.m */; };
 		24A7655F1AA8E66300F1CA09 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A7655E1AA8E66300F1CA09 /* AppDelegate.m */; };
 		24A765671AA8E66300F1CA09 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24A765661AA8E66300F1CA09 /* Images.xcassets */; };
@@ -39,6 +41,9 @@
 
 /* Begin PBXFileReference section */
 		096C30F378B30C140A1F465F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		24194C311AACE345002E5863 /* PhotoWalkTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWalkTableViewCell.h; sourceTree = "<group>"; };
+		24194C321AACE345002E5863 /* PhotoWalkTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWalkTableViewCell.m; sourceTree = "<group>"; };
+		24194C331AACE345002E5863 /* PhotoWalkTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoWalkTableViewCell.xib; sourceTree = "<group>"; };
 		24A765561AA8E66300F1CA09 /* fotowalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fotowalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24A7655A1AA8E66300F1CA09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24A7655B1AA8E66300F1CA09 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -201,6 +206,9 @@
 			children = (
 				826D79D11AAC388300915F19 /* FWCollectionViewLayout.h */,
 				826D79D21AAC388300915F19 /* FWCollectionViewLayout.m */,
+				24194C311AACE345002E5863 /* PhotoWalkTableViewCell.h */,
+				24194C321AACE345002E5863 /* PhotoWalkTableViewCell.m */,
+				24194C331AACE345002E5863 /* PhotoWalkTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -300,6 +308,7 @@
 				826F2D6B1AAAC35600B3B9AE /* PhotoWalkDetailsViewController.xib in Resources */,
 				D1D482FC1AAAA1FC00CA60F7 /* MapViewController.xib in Resources */,
 				24A765671AA8E66300F1CA09 /* Images.xcassets in Resources */,
+				24194C351AACE345002E5863 /* PhotoWalkTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,6 +362,7 @@
 				24A7655F1AA8E66300F1CA09 /* AppDelegate.m in Sources */,
 				D1D483041AAAA74400CA60F7 /* Media.m in Sources */,
 				D1D483071AAAA85000CA60F7 /* FotowalkAPIClient.m in Sources */,
+				24194C341AACE345002E5863 /* PhotoWalkTableViewCell.m in Sources */,
 				D101C0111AAAA0CE00791798 /* MainViewController.m in Sources */,
 				826F2D711AAAC5D800B3B9AE /* Location.m in Sources */,
 				24A7655C1AA8E66300F1CA09 /* main.m in Sources */,
