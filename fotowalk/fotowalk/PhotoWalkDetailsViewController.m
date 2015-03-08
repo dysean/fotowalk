@@ -32,14 +32,15 @@ static CLLocationDegrees const kMinLongitude = -180.0;
 static CLLocationDegrees const kMaxLongitude = 180.0;
 static CLLocationDegrees const kOffsetSpan = 0.005;
 
-static CGFloat const kCellWidth = 200;
-static CGFloat const kCellHeight = 200;
-static CGFloat const kPhotoWidth = 180;
-static CGFloat const kPhotoHeight = 180;
+static CGFloat const kCellWidth = 220;
+static CGFloat const kCellHeight = 220;
+static CGFloat const kPhotoWidth = 200;
+static CGFloat const kPhotoHeight = 200;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.navigationController.navigationBar.opaque = YES;
     self.title = self.photoWalk.name;
 
     [[LocationManager sharedInstance] ensureLocationServices];
