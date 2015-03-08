@@ -13,6 +13,7 @@
 #import "Media.h"
 #import "LocationManager.h"
 #import "UIImageView+AFNetworking.h"
+#import "FWCollectionViewLayout.h"
 
 @interface PhotoWalkDetailsViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -47,10 +48,10 @@ static CGFloat const kPhotoHeight = 180;
     self.mapView.region = [self.mapView regionThatFits:[self regionForPhotoWalk]];
     [self.mapView addAnnotations:self.photoWalk.locations];
 
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    FWCollectionViewLayout *layout = [[FWCollectionViewLayout alloc] init];
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.itemSize = CGSizeMake(kCellWidth, kCellHeight);
-    layout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
+    layout.sectionInset = UIEdgeInsetsZero;
 
     self.locationsView.dataSource = self;
     self.locationsView.delegate = self;
@@ -96,7 +97,7 @@ static CGFloat const kPhotoHeight = 180;
 
     UILabel *title;
     UIImageView *locationPhoto;
-    if (cell.contentView.subviews.count >= 2) {
+    if (cell.contentView.subviews.count == 2) {
         title = cell.contentView.subviews[0];
         locationPhoto = cell.contentView.subviews[1];
     } else if (cell.contentView.subviews.count == 0) {

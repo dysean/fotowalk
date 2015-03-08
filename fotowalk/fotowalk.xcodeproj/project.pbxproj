@@ -11,6 +11,7 @@
 		24A7655F1AA8E66300F1CA09 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A7655E1AA8E66300F1CA09 /* AppDelegate.m */; };
 		24A765671AA8E66300F1CA09 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24A765661AA8E66300F1CA09 /* Images.xcassets */; };
 		24A765761AA8E66300F1CA09 /* fotowalkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A765751AA8E66300F1CA09 /* fotowalkTests.m */; };
+		826D79D31AAC388300915F19 /* FWCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 826D79D21AAC388300915F19 /* FWCollectionViewLayout.m */; };
 		826F2D6A1AAAC35600B3B9AE /* PhotoWalkDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 826F2D681AAAC35600B3B9AE /* PhotoWalkDetailsViewController.m */; };
 		826F2D6B1AAAC35600B3B9AE /* PhotoWalkDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 826F2D691AAAC35600B3B9AE /* PhotoWalkDetailsViewController.xib */; };
 		826F2D6E1AAAC59000B3B9AE /* PhotoWalk.m in Sources */ = {isa = PBXBuildFile; fileRef = 826F2D6D1AAAC59000B3B9AE /* PhotoWalk.m */; };
@@ -47,6 +48,8 @@
 		24A7656F1AA8E66300F1CA09 /* fotowalkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fotowalkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		24A765741AA8E66300F1CA09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24A765751AA8E66300F1CA09 /* fotowalkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = fotowalkTests.m; sourceTree = "<group>"; };
+		826D79D11AAC388300915F19 /* FWCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FWCollectionViewLayout.h; sourceTree = "<group>"; };
+		826D79D21AAC388300915F19 /* FWCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FWCollectionViewLayout.m; sourceTree = "<group>"; };
 		826F2D671AAAC35600B3B9AE /* PhotoWalkDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWalkDetailsViewController.h; sourceTree = "<group>"; };
 		826F2D681AAAC35600B3B9AE /* PhotoWalkDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWalkDetailsViewController.m; sourceTree = "<group>"; };
 		826F2D691AAAC35600B3B9AE /* PhotoWalkDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoWalkDetailsViewController.xib; sourceTree = "<group>"; };
@@ -196,6 +199,8 @@
 		D1D483011AAAA67D00CA60F7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				826D79D11AAC388300915F19 /* FWCollectionViewLayout.h */,
+				826D79D21AAC388300915F19 /* FWCollectionViewLayout.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -351,6 +356,7 @@
 				D101C0111AAAA0CE00791798 /* MainViewController.m in Sources */,
 				826F2D711AAAC5D800B3B9AE /* Location.m in Sources */,
 				24A7655C1AA8E66300F1CA09 /* main.m in Sources */,
+				826D79D31AAC388300915F19 /* FWCollectionViewLayout.m in Sources */,
 				826F2D741AAAD6AF00B3B9AE /* LocationManager.m in Sources */,
 				D1D482FB1AAAA1FC00CA60F7 /* MapViewController.m in Sources */,
 				826F2D6A1AAAC35600B3B9AE /* PhotoWalkDetailsViewController.m in Sources */,
