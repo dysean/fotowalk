@@ -26,12 +26,6 @@
 
 @implementation PhotoWalkDetailsViewController
 
-static CLLocationDegrees const kMinLatitude = -90.0;
-static CLLocationDegrees const kMaxLatitude = 90.0;
-static CLLocationDegrees const kMinLongitude = -180.0;
-static CLLocationDegrees const kMaxLongitude = 180.0;
-static CLLocationDegrees const kOffsetSpan = 0.005;
-
 static CGFloat const kCellWidth = 220;
 static CGFloat const kCellHeight = 220;
 static CGFloat const kPhotoWidth = 200;
@@ -46,7 +40,7 @@ static CGFloat const kPhotoHeight = 200;
     [[LocationManager sharedInstance] ensureLocationServices];
 
     self.mapView.showsUserLocation = YES;
-    self.mapView.region = [self.mapView regionThatFits:[self regionForPhotoWalk]];
+    self.mapView.region = [self.mapView regionThatFits:[self.photoWalk region]];
     [self.mapView addAnnotations:self.photoWalk.locations];
 
     FWCollectionViewLayout *layout = [[FWCollectionViewLayout alloc] init];
@@ -60,29 +54,6 @@ static CGFloat const kPhotoHeight = 200;
     self.locationsView.allowsMultipleSelection = NO;
     self.locationsView.collectionViewLayout = layout;
     [self.locationsView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"LocationCell"];
-}
-
-- (MKCoordinateRegion)regionForPhotoWalk {
-    CLLocationDegrees minLat = kMaxLatitude;
-    CLLocationDegrees maxLat = kMinLatitude;
-    CLLocationDegrees minLon = kMaxLongitude;
-    CLLocationDegrees maxLon = kMinLongitude;
-
-    for (Location *location in self.photoWalk.locations) {
-        minLat = fmin(location.coordinate.latitude, minLat);
-        maxLat = fmax(location.coordinate.latitude, maxLat);
-        minLon = fmin(location.coordinate.longitude, minLon);
-        maxLon = fmax(location.coordinate.longitude, maxLon);
-    }
-
-    MKCoordinateSpan span = MKCoordinateSpanMake(maxLat - minLat, maxLon - minLon);
-
-    MKCoordinateSpan spanWithOffset = MKCoordinateSpanMake(span.latitudeDelta + kOffsetSpan,
-                                                           span.longitudeDelta + kOffsetSpan);
-
-    CLLocationCoordinate2D center = CLLocationCoordinate2DMake(maxLat - span.latitudeDelta / 2,
-                                                               maxLon - span.longitudeDelta / 2);
-    return MKCoordinateRegionMake(center, spanWithOffset);
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {

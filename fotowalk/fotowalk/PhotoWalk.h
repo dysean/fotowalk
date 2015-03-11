@@ -17,5 +17,6 @@
 @property (nonatomic, strong) NSArray *locations;
 
 + (PhotoWalk *)defaultPhotoWalk;
+- (MKCoordinateRegion)region;
 
 @end
