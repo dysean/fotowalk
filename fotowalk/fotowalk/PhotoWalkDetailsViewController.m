@@ -20,7 +20,12 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UICollectionView *locationsView;
 @property (strong, nonatomic) NSIndexPath *highlightedIndexPath;
+@property (strong, atomic) NSMutableArray *routes;
+@property (assign, atomic) NSInteger routesReturned;
 
+- (void)calculateDirections;
+- (NSArray *)getDirections;
+- (MKMapItem *)mapItemForLocation:(Location *)location;
 - (IBAction)onGo:(id)sender;
 
 @end
@@ -44,9 +49,7 @@ static CGFloat const kPhotoHeight = 200;
     self.mapView.delegate = self;
     self.mapView.region = [self.mapView regionThatFits:[self.photoWalk region]];
     [self.mapView addAnnotations:self.photoWalk.locations];
-    [self.mapView addOverlay:[self walkRouteOverlay]];
-
-
+    [self calculateDirections];
 
     FWCollectionViewLayout *layout = [[FWCollectionViewLayout alloc] init];
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
@@ -64,20 +67,80 @@ static CGFloat const kPhotoHeight = 200;
     [self collectionViewLayout:layout willHighlightCellAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
 }
 
-- (MKPolyline *)walkRouteOverlay {
-    CLLocationCoordinate2D coordinates[self.photoWalk.locations.count];
-    NSUInteger index = 0;
-    for (Location *location in self.photoWalk.locations) {
-        coordinates[index++] = location.coordinate;
+- (void)initializeRoutesWithCapacity:(NSUInteger)capacity {
+    self.routes = [NSMutableArray arrayWithCapacity:capacity];
+    for (int i = 0; i < capacity; i++) {
+        [self.routes addObject:[NSNull null]];
     }
-    return [MKPolyline polylineWithCoordinates:coordinates count:self.photoWalk.locations.count];
+    self.routesReturned = 0;
+}
+
+- (void)calculateDirections {
+    if (self.routes.count > 0) {
+        return;
+    }
+    NSArray *directionsArray = [self getDirections];
+    [self initializeRoutesWithCapacity:directionsArray.count];
+    [directionsArray enumerateObjectsUsingBlock:^(MKDirections *directions, NSUInteger idx, BOOL *stop) {
+        [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error) {
+            if (error) {
+                NSLog(@"Error while calculating directions: %@", error);
+                return;
+            }
+            MKRoute *route = [response.routes firstObject];
+            [self.routes replaceObjectAtIndex:idx withObject:route];
+            self.routesReturned++;
+            if (self.routesReturned == directionsArray.count) {
+                [self didFinishCalculatingRoutes];
+            }
+        }];
+    }];
+}
+
+- (NSArray *)getDirections {
+    NSMutableArray *directions = [NSMutableArray array];
+    MKMapItem __block * lastMapItem = [self mapItemForLocation:[self.photoWalk.locations firstObject]];
+    NSRange range;
+    range.location = 1;
+    range.length = self.photoWalk.locations.count - 1;
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
+    [self.photoWalk.locations enumerateObjectsAtIndexes:indexSet options:0 usingBlock:^(Location *currentLocation, NSUInteger idx, BOOL *stop) {
+        MKDirectionsRequest *directionsRequest = [[MKDirectionsRequest alloc] init];
+        directionsRequest.source = lastMapItem;
+        directionsRequest.destination = [self mapItemForLocation:currentLocation];
+        directionsRequest.transportType = MKDirectionsTransportTypeWalking;
+        lastMapItem = directionsRequest.destination;
+        [directions addObject:[[MKDirections alloc] initWithRequest:directionsRequest]];
+    }];
+    return directions;
+}
+
+- (void)didFinishCalculatingRoutes {
+    [self addRoutesOverlay];
+}
+
+- (void)addRoutesOverlay {
+    NSMutableArray *polylines = [NSMutableArray array];
+    for (MKRoute *route in self.routes) {
+        [polylines addObject:route.polyline];
+    }
+    [self.mapView addOverlays:polylines];
+}
+
+- (MKMapItem *)mapItemForLocation:(Location *)location {
+    MKPlacemark *destinationPlacemark = [[MKPlacemark alloc] initWithCoordinate:location.coordinate addressDictionary:nil];
+    return [[MKMapItem alloc] initWithPlacemark:destinationPlacemark];
 }
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
-    // TODO: the route needs to follow the roads, maybe we need to call google maps here =(
-    MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithPolyline:[self walkRouteOverlay]];
-    renderer.strokeColor = [UIColor redColor];
-    renderer.lineWidth = 1.0;
+    if (![overlay isKindOfClass:[MKPolyline class]]) {
+        NSLog(@"Error: Unexpected MKOverlay.");
+        return nil;
+    }
+    MKPolyline *polyline = overlay;
+    MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithPolyline:polyline];
+    renderer.strokeColor = [UIColor blueColor];
+    renderer.lineWidth = 2.0;
     return renderer;
 }
 

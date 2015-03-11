@@ -62,14 +62,6 @@ static CLLocationDegrees const kOffsetSpan = 0.005;
             tacolicious.coordinate = CLLocationCoordinate2DMake(37.761089, -122.421346);
             tacolicious.photos = @[photoAtTacolicious];
 
-            // Balmy Alley
-            Media *photoAtBalmyAlley = [[Media alloc] init];
-            photoAtBalmyAlley.url = @"https://scontent-iad.cdninstagram.com/hphotos-xaf1/t51.2885-15/10990593_843507585688191_1387495202_n.jpg";
-            Location *balmyAlley = [[Location alloc] init];
-            balmyAlley.name = @"Balmy Alley";
-            balmyAlley.coordinate = CLLocationCoordinate2DMake(37.751884, -122.412366);
-            balmyAlley.photos = @[photoAtBalmyAlley];
-
             // Clarion Alley
             Media *photoAtClarionAlley = [[Media alloc] init];
             photoAtClarionAlley.url = @"https://igcdn-photos-d-a.akamaihd.net/hphotos-ak-xaf1/t51.2885-15/10986090_1565543290396779_1090682747_n.jpg";
@@ -86,11 +78,19 @@ static CLLocationDegrees const kOffsetSpan = 0.005;
             gravelAndGold.coordinate = CLLocationCoordinate2DMake(37.757421, -122.420539);
             gravelAndGold.photos = @[photoAtGravelAndGold];
 
+            // Balmy Alley
+            Media *photoAtBalmyAlley = [[Media alloc] init];
+            photoAtBalmyAlley.url = @"https://scontent-iad.cdninstagram.com/hphotos-xaf1/t51.2885-15/10990593_843507585688191_1387495202_n.jpg";
+            Location *balmyAlley = [[Location alloc] init];
+            balmyAlley.name = @"Balmy Alley";
+            balmyAlley.coordinate = CLLocationCoordinate2DMake(37.751884, -122.412366);
+            balmyAlley.photos = @[photoAtBalmyAlley];
+
             // Mission Photo Walk
             defaultInstance = [[PhotoWalk alloc] init];
             defaultInstance.name = @"Mission";
             defaultInstance.length = 300.0; // meters
-            defaultInstance.locations = @[doloresPark, tacolicious, balmyAlley, clarionAlley, gravelAndGold];
+            defaultInstance.locations = @[doloresPark, tacolicious, clarionAlley, gravelAndGold, balmyAlley];
         }
     });
     return defaultInstance;
