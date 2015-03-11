@@ -70,11 +70,27 @@ static CLLocationDegrees const kOffsetSpan = 0.005;
             balmyAlley.coordinate = CLLocationCoordinate2DMake(37.751884, -122.412366);
             balmyAlley.photos = @[photoAtBalmyAlley];
 
+            // Clarion Alley
+            Media *photoAtClarionAlley = [[Media alloc] init];
+            photoAtClarionAlley.url = @"https://igcdn-photos-d-a.akamaihd.net/hphotos-ak-xaf1/t51.2885-15/10986090_1565543290396779_1090682747_n.jpg";
+            Location *clarionAlley = [[Location alloc] init];
+            clarionAlley.name = @"Clarion Alley";
+            clarionAlley.coordinate = CLLocationCoordinate2DMake(37.763176, -122.419529);
+            clarionAlley.photos = @[photoAtClarionAlley];
+
+            // Gravel and Gold
+            Media *photoAtGravelAndGold = [[Media alloc] init];
+            photoAtGravelAndGold.url = @"https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpa1/t51.2885-15/10576039_556757027779521_2135052316_n.jpg";
+            Location *gravelAndGold = [[Location alloc] init];
+            gravelAndGold.name = @"Gravel and Gold";
+            gravelAndGold.coordinate = CLLocationCoordinate2DMake(37.757421, -122.420539);
+            gravelAndGold.photos = @[photoAtGravelAndGold];
+
             // Mission Photo Walk
             defaultInstance = [[PhotoWalk alloc] init];
             defaultInstance.name = @"Mission";
             defaultInstance.length = 300.0; // meters
-            defaultInstance.locations = @[doloresPark, tacolicious, balmyAlley];
+            defaultInstance.locations = @[doloresPark, tacolicious, balmyAlley, clarionAlley, gravelAndGold];
         }
     });
     return defaultInstance;

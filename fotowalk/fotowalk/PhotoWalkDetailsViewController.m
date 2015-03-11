@@ -15,10 +15,11 @@
 #import "UIImageView+AFNetworking.h"
 #import "FWCollectionViewLayout.h"
 
-@interface PhotoWalkDetailsViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface PhotoWalkDetailsViewController () <UICollectionViewDataSource, UICollectionViewDelegate, FWCollectionViewLayoutDelegate, MKMapViewDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UICollectionView *locationsView;
+@property (strong, nonatomic) NSIndexPath *highlightedIndexPath;
 
 - (IBAction)onGo:(id)sender;
 
@@ -40,13 +41,18 @@ static CGFloat const kPhotoHeight = 200;
     [[LocationManager sharedInstance] ensureLocationServices];
 
     self.mapView.showsUserLocation = YES;
+    self.mapView.delegate = self;
     self.mapView.region = [self.mapView regionThatFits:[self.photoWalk region]];
     [self.mapView addAnnotations:self.photoWalk.locations];
+    [self.mapView addOverlay:[self walkRouteOverlay]];
+
+
 
     FWCollectionViewLayout *layout = [[FWCollectionViewLayout alloc] init];
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.itemSize = CGSizeMake(kCellWidth, kCellHeight);
     layout.sectionInset = UIEdgeInsetsZero;
+    layout.delegate = self;
 
     self.locationsView.dataSource = self;
     self.locationsView.delegate = self;
@@ -54,10 +60,29 @@ static CGFloat const kPhotoHeight = 200;
     self.locationsView.allowsMultipleSelection = NO;
     self.locationsView.collectionViewLayout = layout;
     [self.locationsView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"LocationCell"];
+
+    [self collectionViewLayout:layout willHighlightCellAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+}
+
+- (MKPolyline *)walkRouteOverlay {
+    CLLocationCoordinate2D coordinates[self.photoWalk.locations.count];
+    NSUInteger index = 0;
+    for (Location *location in self.photoWalk.locations) {
+        coordinates[index++] = location.coordinate;
+    }
+    return [MKPolyline polylineWithCoordinates:coordinates count:self.photoWalk.locations.count];
+}
+
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
+    // TODO: the route needs to follow the roads, maybe we need to call google maps here =(
+    MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithPolyline:[self walkRouteOverlay]];
+    renderer.strokeColor = [UIColor redColor];
+    renderer.lineWidth = 1.0;
+    return renderer;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return self.photoWalk.locations.count * 5;
+    return self.photoWalk.locations.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -87,7 +112,7 @@ static CGFloat const kPhotoHeight = 200;
         NSLog(@"Houston, we have a problem!!!");
     }
 
-    Location *location = self.photoWalk.locations[indexPath.section % 2];
+    Location *location = self.photoWalk.locations[indexPath.section];
     Media *firstPhoto = location.photos[0];
 
     title.text = location.name;
@@ -96,6 +121,21 @@ static CGFloat const kPhotoHeight = 200;
     [locationPhoto setImageWithURL:[NSURL URLWithString:firstPhoto.url]];
 
     return cell;
+}
+
+- (void)collectionViewLayout:(FWCollectionViewLayout *)collectionViewLayout willHighlightCellAtIndexPath:(NSIndexPath *)indexPath {
+    if ([self.highlightedIndexPath isEqual:indexPath]) {
+        return;
+    }
+
+    if (self.highlightedIndexPath) {
+        for (id<MKAnnotation> annotationToDeselect in self.mapView.selectedAnnotations) {
+            [self.mapView deselectAnnotation:annotationToDeselect animated:YES];
+        }
+    }
+
+    id<MKAnnotation> locationToSelect = self.photoWalk.locations[indexPath.section];
+    [self.mapView selectAnnotation:locationToSelect animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -26,6 +26,7 @@ static CGFloat const kMaxDistanceForVisible = 0.1;
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
     NSArray *attributesArray = [super layoutAttributesForElementsInRect:rect];
+    NSIndexPath *indexPathToHighlight = nil;
     for (UICollectionViewLayoutAttributes *layoutAttributes in attributesArray) {
         CGFloat x0 = layoutAttributes.center.x;
         CGFloat x1 = self.collectionView.center.x + self.collectionView.bounds.origin.x;
@@ -35,12 +36,16 @@ static CGFloat const kMaxDistanceForVisible = 0.1;
         if (distancePercent < kMaxDistanceForVisible) {
             layoutAttributes.alpha = 1;
             layoutAttributes.transform = CGAffineTransformMakeScale(1.0, 1.0);
+            indexPathToHighlight = layoutAttributes.indexPath;
         } else {
             layoutAttributes.alpha = 1 - (distancePercent - kMaxDistanceForVisible) * 0.8;
             CGFloat scale = 1 - (distancePercent - kMaxDistanceForVisible) * 0.5;
             layoutAttributes.transform = CGAffineTransformMakeScale(scale, scale);
 
         }
+    }
+    if (indexPathToHighlight) {
+        [self.delegate collectionViewLayout:self willHighlightCellAtIndexPath:indexPathToHighlight];
     }
     return attributesArray;
 }
