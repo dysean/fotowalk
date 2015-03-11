@@ -14,7 +14,6 @@
 
 
 @interface MainViewController () <UITableViewDelegate,UITableViewDataSource>
-- (IBAction)onClickMapButton:(id)sender;
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
 
 @end
