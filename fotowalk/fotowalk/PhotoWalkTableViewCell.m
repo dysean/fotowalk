@@ -42,6 +42,7 @@
     
     Location *firstLocation = currentWalk.locations[0];
     Media *firstPhoto = firstLocation.photos[0];
+    NSLog(@"%@",firstPhoto.url);
     [self.walkImageView setImageWithURL:[NSURL URLWithString:firstPhoto.url]];
 }
 

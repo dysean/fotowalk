@@ -37,7 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.photoWalk = [PhotoWalk defaultPhotoWalk];
+//    self.photoWalk = [PhotoWalk defaultPhotoWalk];
 
     self.title = @"Photo Walk";
     

@@ -15,30 +15,18 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPr-jN-wff">
-                    <rect key="frame" x="0.0" y="55" width="165" height="30"/>
-                    <state key="normal" title="Launch Maps Controller">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onClickMapButton:" destination="-1" eventType="touchUpInside" id="ESJ-5W-9C3"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DJG-Hd-mde">
-                    <rect key="frame" x="14" y="8" width="136" height="30"/>
-                    <state key="normal" title="Mission Photo Walk">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onMissionWalk:" destination="-1" eventType="touchUpInside" id="kyz-dX-5YG"/>
-                    </connections>
-                </button>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rX4-2Y-RvW">
-                    <rect key="frame" x="0.0" y="84" width="320" height="484"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rX4-2Y-RvW">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="rX4-2Y-RvW" secondAttribute="bottom" id="2zJ-p2-l00"/>
+                <constraint firstAttribute="trailing" secondItem="rX4-2Y-RvW" secondAttribute="trailing" id="dl1-cJ-7Ba"/>
+                <constraint firstItem="rX4-2Y-RvW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="vF7-M2-RZh"/>
+                <constraint firstItem="rX4-2Y-RvW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ydl-CE-NIW"/>
+            </constraints>
             <point key="canvasLocation" x="139" y="154"/>
         </view>
     </objects>

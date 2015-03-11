@@ -16,7 +16,7 @@
 @property (nonatomic, assign) CGFloat length;
 @property (nonatomic, strong) NSArray *locations;
 
-+ (PhotoWalk *)defaultPhotoWalk;
 - (MKCoordinateRegion)region;
+- (id) initWithDictionary: (NSDictionary *)dictionary;
 
 @end

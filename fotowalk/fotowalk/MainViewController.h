@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PhotoWalk.h"
+#import "City.h"
 
 @interface MainViewController : UIViewController
 
-@property (nonatomic, strong) PhotoWalk *photoWalk;
+@property (nonatomic, strong) NSDictionary *cityDictionary;
+@property (nonatomic,strong) NSArray *currentPhotoWalk;
+@property (nonatomic, strong) NSString *currentCity;
 
 @end
