@@ -41,7 +41,6 @@ static CLLocationDegrees const kOffsetSpan = 0.005;
     return MKCoordinateRegionMake(center, spanWithOffset);
 }
 
-
 - (id) initWithDictionary: (NSDictionary *)dictionary {
     self = [super init];
     if (self) {

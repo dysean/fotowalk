@@ -15,11 +15,17 @@
 #import "UIImageView+AFNetworking.h"
 #import "FWCollectionViewLayout.h"
 
-@interface PhotoWalkDetailsViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface PhotoWalkDetailsViewController () <UICollectionViewDataSource, UICollectionViewDelegate, FWCollectionViewLayoutDelegate, MKMapViewDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UICollectionView *locationsView;
+@property (strong, nonatomic) NSIndexPath *highlightedIndexPath;
+@property (strong, atomic) NSMutableArray *routes;
+@property (assign, atomic) NSInteger routesReturned;
 
+- (void)calculateDirections;
+- (NSArray *)getDirections;
+- (MKMapItem *)mapItemForLocation:(Location *)location;
 - (IBAction)onGo:(id)sender;
 
 @end
@@ -34,19 +40,22 @@ static CGFloat const kPhotoHeight = 200;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.navigationController.navigationBar.opaque = YES;
+    self.navigationController.navigationBar.translucent = NO;
     self.title = self.photoWalk.name;
 
     [[LocationManager sharedInstance] ensureLocationServices];
 
     self.mapView.showsUserLocation = YES;
+    self.mapView.delegate = self;
     self.mapView.region = [self.mapView regionThatFits:[self.photoWalk region]];
     [self.mapView addAnnotations:self.photoWalk.locations];
+    [self calculateDirections];
 
     FWCollectionViewLayout *layout = [[FWCollectionViewLayout alloc] init];
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.itemSize = CGSizeMake(kCellWidth, kCellHeight);
     layout.sectionInset = UIEdgeInsetsZero;
+    layout.delegate = self;
 
     self.locationsView.dataSource = self;
     self.locationsView.delegate = self;
@@ -54,10 +63,89 @@ static CGFloat const kPhotoHeight = 200;
     self.locationsView.allowsMultipleSelection = NO;
     self.locationsView.collectionViewLayout = layout;
     [self.locationsView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"LocationCell"];
+
+    [self collectionViewLayout:layout willHighlightCellAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+}
+
+- (void)initializeRoutesWithCapacity:(NSUInteger)capacity {
+    self.routes = [NSMutableArray arrayWithCapacity:capacity];
+    for (int i = 0; i < capacity; i++) {
+        [self.routes addObject:[NSNull null]];
+    }
+    self.routesReturned = 0;
+}
+
+- (void)calculateDirections {
+    if (self.routes.count > 0) {
+        return;
+    }
+    NSArray *directionsArray = [self getDirections];
+    [self initializeRoutesWithCapacity:directionsArray.count];
+    [directionsArray enumerateObjectsUsingBlock:^(MKDirections *directions, NSUInteger idx, BOOL *stop) {
+        [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error) {
+            if (error) {
+                NSLog(@"Error while calculating directions: %@", error);
+                return;
+            }
+            MKRoute *route = [response.routes firstObject];
+            [self.routes replaceObjectAtIndex:idx withObject:route];
+            self.routesReturned++;
+            if (self.routesReturned == directionsArray.count) {
+                [self didFinishCalculatingRoutes];
+            }
+        }];
+    }];
+}
+
+- (NSArray *)getDirections {
+    NSMutableArray *directions = [NSMutableArray array];
+    MKMapItem __block * lastMapItem = [self mapItemForLocation:[self.photoWalk.locations firstObject]];
+    NSRange range;
+    range.location = 1;
+    range.length = self.photoWalk.locations.count - 1;
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
+    [self.photoWalk.locations enumerateObjectsAtIndexes:indexSet options:0 usingBlock:^(Location *currentLocation, NSUInteger idx, BOOL *stop) {
+        MKDirectionsRequest *directionsRequest = [[MKDirectionsRequest alloc] init];
+        directionsRequest.source = lastMapItem;
+        directionsRequest.destination = [self mapItemForLocation:currentLocation];
+        directionsRequest.transportType = MKDirectionsTransportTypeWalking;
+        lastMapItem = directionsRequest.destination;
+        [directions addObject:[[MKDirections alloc] initWithRequest:directionsRequest]];
+    }];
+    return directions;
+}
+
+- (void)didFinishCalculatingRoutes {
+    [self addRoutesOverlay];
+}
+
+- (void)addRoutesOverlay {
+    NSMutableArray *polylines = [NSMutableArray array];
+    for (MKRoute *route in self.routes) {
+        [polylines addObject:route.polyline];
+    }
+    [self.mapView addOverlays:polylines];
+}
+
+- (MKMapItem *)mapItemForLocation:(Location *)location {
+    MKPlacemark *destinationPlacemark = [[MKPlacemark alloc] initWithCoordinate:location.coordinate addressDictionary:nil];
+    return [[MKMapItem alloc] initWithPlacemark:destinationPlacemark];
+}
+
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
+    if (![overlay isKindOfClass:[MKPolyline class]]) {
+        NSLog(@"Error: Unexpected MKOverlay.");
+        return nil;
+    }
+    MKPolyline *polyline = overlay;
+    MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithPolyline:polyline];
+    renderer.strokeColor = [UIColor blueColor];
+    renderer.lineWidth = 2.0;
+    return renderer;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return self.photoWalk.locations.count * 5;
+    return self.photoWalk.locations.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -87,7 +175,7 @@ static CGFloat const kPhotoHeight = 200;
         NSLog(@"Houston, we have a problem!!!");
     }
 
-    Location *location = self.photoWalk.locations[indexPath.section % 2];
+    Location *location = self.photoWalk.locations[indexPath.section];
     Media *firstPhoto = location.photos[0];
 
     title.text = location.name;
@@ -96,6 +184,21 @@ static CGFloat const kPhotoHeight = 200;
     [locationPhoto setImageWithURL:[NSURL URLWithString:firstPhoto.url]];
 
     return cell;
+}
+
+- (void)collectionViewLayout:(FWCollectionViewLayout *)collectionViewLayout willHighlightCellAtIndexPath:(NSIndexPath *)indexPath {
+    if ([self.highlightedIndexPath isEqual:indexPath]) {
+        return;
+    }
+
+    if (self.highlightedIndexPath) {
+        for (id<MKAnnotation> annotationToDeselect in self.mapView.selectedAnnotations) {
+            [self.mapView deselectAnnotation:annotationToDeselect animated:YES];
+        }
+    }
+
+    id<MKAnnotation> locationToSelect = self.photoWalk.locations[indexPath.section];
+    [self.mapView selectAnnotation:locationToSelect animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class FWCollectionViewLayout;
+
+@protocol FWCollectionViewLayoutDelegate <NSObject>
+
+- (void)collectionViewLayout:(FWCollectionViewLayout *)collectionViewLayout
+willHighlightCellAtIndexPath:(NSIndexPath *)indexPath;
+
+@end
+
 @interface FWCollectionViewLayout : UICollectionViewFlowLayout
+
+@property (nonatomic, weak) id<FWCollectionViewLayoutDelegate> delegate;
 
 @end

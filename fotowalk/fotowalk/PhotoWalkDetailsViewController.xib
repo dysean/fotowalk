@@ -13,15 +13,34 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hYc-VC-1QO">
-                    <rect key="frame" x="0.0" y="62" width="320" height="160"/>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hYc-VC-1QO">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="119-jr-HIF"/>
+                    </constraints>
                 </mapView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z85-lv-ts2">
-                    <rect key="frame" x="8" y="530" width="304" height="30"/>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="iYd-K0-Fxn">
+                    <rect key="frame" x="0.0" y="200" width="320" height="248"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="248" id="eXY-R5-cxI"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Agw-H6-zQh">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z85-lv-ts2">
+                    <rect key="frame" x="8" y="456" width="304" height="40"/>
                     <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="yDo-It-kRe"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <state key="normal" title="Go!">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -30,17 +49,21 @@
                         <action selector="onGo:" destination="-1" eventType="touchUpInside" id="nab-Lv-SNk"/>
                     </connections>
                 </button>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="iYd-K0-Fxn">
-                    <rect key="frame" x="0.0" y="222" width="320" height="300"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Agw-H6-zQh">
-                        <size key="itemSize" width="50" height="50"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    </collectionViewFlowLayout>
-                </collectionView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="iYd-K0-Fxn" secondAttribute="trailing" id="1Sa-8M-Gpb"/>
+                <constraint firstItem="iYd-K0-Fxn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Mh8-zO-M9y"/>
+                <constraint firstItem="z85-lv-ts2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="OOM-Cp-8C3"/>
+                <constraint firstAttribute="trailing" secondItem="hYc-VC-1QO" secondAttribute="trailing" id="Q9L-2S-sF8"/>
+                <constraint firstItem="iYd-K0-Fxn" firstAttribute="top" secondItem="hYc-VC-1QO" secondAttribute="bottom" id="W0r-GF-AwK"/>
+                <constraint firstItem="hYc-VC-1QO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ww3-b0-1wX"/>
+                <constraint firstItem="z85-lv-ts2" firstAttribute="top" secondItem="iYd-K0-Fxn" secondAttribute="bottom" constant="8" id="cn8-S0-UQH"/>
+                <constraint firstAttribute="trailing" secondItem="z85-lv-ts2" secondAttribute="trailing" constant="8" id="jXn-S2-2WX"/>
+                <constraint firstItem="hYc-VC-1QO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="p8u-a6-t2I"/>
+                <constraint firstAttribute="bottom" secondItem="z85-lv-ts2" secondAttribute="bottom" constant="8" id="vEy-67-6f0"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <point key="canvasLocation" x="139" y="154"/>
         </view>
     </objects>

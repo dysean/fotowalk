@@ -14,6 +14,7 @@
 		24A765671AA8E66300F1CA09 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24A765661AA8E66300F1CA09 /* Images.xcassets */; };
 		24A765761AA8E66300F1CA09 /* fotowalkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A765751AA8E66300F1CA09 /* fotowalkTests.m */; };
 		24D333A31AAFE8C900E8A9F5 /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D333A21AAFE8C900E8A9F5 /* City.m */; };
+		8222D6701AB007C400C64AEF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8222D66F1AB007C400C64AEF /* CoreLocation.framework */; };
 		826D79D31AAC388300915F19 /* FWCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 826D79D21AAC388300915F19 /* FWCollectionViewLayout.m */; };
 		826F2D6A1AAAC35600B3B9AE /* PhotoWalkDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 826F2D681AAAC35600B3B9AE /* PhotoWalkDetailsViewController.m */; };
 		826F2D6B1AAAC35600B3B9AE /* PhotoWalkDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 826F2D691AAAC35600B3B9AE /* PhotoWalkDetailsViewController.xib */; };
@@ -56,6 +57,7 @@
 		24A765751AA8E66300F1CA09 /* fotowalkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = fotowalkTests.m; sourceTree = "<group>"; };
 		24D333A11AAFE8C900E8A9F5 /* City.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = City.h; sourceTree = "<group>"; };
 		24D333A21AAFE8C900E8A9F5 /* City.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = City.m; sourceTree = "<group>"; };
+		8222D66F1AB007C400C64AEF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		826D79D11AAC388300915F19 /* FWCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FWCollectionViewLayout.h; sourceTree = "<group>"; };
 		826D79D21AAC388300915F19 /* FWCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FWCollectionViewLayout.m; sourceTree = "<group>"; };
 		826F2D671AAAC35600B3B9AE /* PhotoWalkDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWalkDetailsViewController.h; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8222D6701AB007C400C64AEF /* CoreLocation.framework in Frameworks */,
 				D1D482FE1AAAA32A00CA60F7 /* MapKit.framework in Frameworks */,
 				C1D993A8BCE6120C980319B0 /* libPods.a in Frameworks */,
 			);
@@ -221,6 +224,7 @@
 		F63372A91C5C7869D3203854 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8222D66F1AB007C400C64AEF /* CoreLocation.framework */,
 				D1D482FD1AAAA32A00CA60F7 /* MapKit.framework */,
 				BB4EA72D39201F4874500D35 /* libPods.a */,
 			);
