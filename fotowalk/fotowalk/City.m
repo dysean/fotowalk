@@ -12,11 +12,11 @@
 
 @implementation City
 
-+ (City *)defaultCity {
-    static City * defaultInstance = nil;
++ (NSDictionary *)defaultCityDictionary {
+    static NSDictionary *defaultCityDictionary = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        if (defaultInstance == nil) {
+        if (defaultCityDictionary == nil) {
             
             // Dolores Park
             Media *photoAtDolores = [[Media alloc] init];
@@ -69,14 +69,13 @@
             goldenGatePhotoWalk.name = @"Golden Gate";
             goldenGatePhotoWalk.length = 300.0; // meters
             goldenGatePhotoWalk.locations = @[goldenGate, hawkHill];
+            NSDictionary *cityDictionary = @{@"San Francisco" : @[missionPhotoWalk, goldenGatePhotoWalk], @"New York City" : @[missionPhotoWalk]};
             
-            defaultInstance = [[City alloc] init];
-            defaultInstance = @[@{@"name" : @"San Francisco",
-                @"photoWalks" : @[missionPhotoWalk, goldenGatePhotoWalk]}];
-
+            defaultCityDictionary = [[NSDictionary alloc] init];
+            defaultCityDictionary = cityDictionary;
         }
     });
-    return defaultInstance;
-    
+    return defaultCityDictionary;
 }
+
 @end

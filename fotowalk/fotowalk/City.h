@@ -10,6 +10,6 @@
 
 @interface City : NSObject
 
-@property(strong, nonatomic) NSArray *city;
++ (NSDictionary *)defaultCityDictionary;
 
 @end

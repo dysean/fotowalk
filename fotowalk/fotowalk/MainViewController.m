@@ -12,6 +12,7 @@
 #import "PhotoWalkTableViewCell.h"
 
 
+
 @interface MainViewController () <UITableViewDelegate,UITableViewDataSource>
 - (IBAction)onClickMapButton:(id)sender;
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
@@ -22,7 +23,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Fotowalk";
+    
+    self.currentCity = @"San Francisco";
+    
+    self.title = self.currentCity;
+
+    self.cityDictionary = [City defaultCityDictionary];
+    self.currentPhotoWalk = self.cityDictionary[self.currentCity];
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Explore" style:UIBarButtonItemStylePlain target:self action:@selector(onMapButton)];
     
     self.mainTableView.delegate = self;
     self.mainTableView.dataSource = self;
@@ -36,37 +45,31 @@
     [super didReceiveMemoryWarning];
 }
 
-- (IBAction)onClickMapButton:(id)sender {
+- (void)onMapButton {
     MapViewController *mapController = [[MapViewController alloc] init];
     [self.navigationController pushViewController:mapController animated:YES];
-}
-
-- (IBAction)onMissionWalk:(id)sender {
-    PhotoWalkDetailsViewController *detailsController = [[PhotoWalkDetailsViewController alloc] init];
-    detailsController.photoWalk = [PhotoWalk defaultPhotoWalk];
-    [self.navigationController pushViewController:detailsController animated:YES];
 }
 
 #pragma mark - Table View Methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    NSArray *photoWalks = self.currentPhotoWalk;
+    return photoWalks.count;
     
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PhotoWalkTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PhotoWalkTableViewCell"];
-
-    PhotoWalk *walk = [PhotoWalk defaultPhotoWalk];
+    
+    PhotoWalk *walk = self.currentPhotoWalk[indexPath.row];
     cell.photoWalk = walk;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
     PhotoWalkDetailsViewController *detailsController = [[PhotoWalkDetailsViewController alloc] init];
-    detailsController.photoWalk = [PhotoWalk defaultPhotoWalk];
+    detailsController.photoWalk = self.currentPhotoWalk[indexPath.row];
     [self.navigationController pushViewController:detailsController animated:YES];
 }
 
