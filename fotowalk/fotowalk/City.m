@@ -12,6 +12,7 @@
 
 @implementation City
 
+
 + (NSDictionary *)defaultCityDictionary {
     static NSDictionary *defaultCityDictionary = nil;
     static dispatch_once_t onceToken;
@@ -63,12 +64,13 @@
             missionPhotoWalk.name = @"Mission";
             missionPhotoWalk.length = 300.0; // meters
             missionPhotoWalk.locations = @[doloresPark, balmyAlley, tacolicious];
-            
+
             // Golden Gate Photo Walk
             PhotoWalk *goldenGatePhotoWalk = [[PhotoWalk alloc] init];
             goldenGatePhotoWalk.name = @"Golden Gate";
             goldenGatePhotoWalk.length = 300.0; // meters
             goldenGatePhotoWalk.locations = @[goldenGate, hawkHill];
+            
             NSDictionary *cityDictionary = @{@"San Francisco" : @[missionPhotoWalk, goldenGatePhotoWalk], @"New York City" : @[missionPhotoWalk]};
             
             defaultCityDictionary = [[NSDictionary alloc] init];

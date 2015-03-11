@@ -9,6 +9,7 @@
 #import "PhotoWalk.h"
 #import "Media.h"
 
+
 @implementation PhotoWalk
 
 static CLLocationDegrees const kMinLatitude = -90.0;
@@ -39,6 +40,7 @@ static CLLocationDegrees const kOffsetSpan = 0.005;
                                                                maxLon - span.longitudeDelta / 2);
     return MKCoordinateRegionMake(center, spanWithOffset);
 }
+
 
 - (id) initWithDictionary: (NSDictionary *)dictionary {
     self = [super init];
