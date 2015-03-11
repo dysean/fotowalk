@@ -35,7 +35,7 @@ static CGFloat const kPhotoHeight = 200;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.navigationController.navigationBar.opaque = YES;
+    self.navigationController.navigationBar.translucent = NO;
     self.title = self.photoWalk.name;
 
     [[LocationManager sharedInstance] ensureLocationServices];
