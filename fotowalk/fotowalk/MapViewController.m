@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *directions;
 
 @property (assign, nonatomic) Location *currentLocation;
+@property (assign, nonatomic) MKRoute *currentRoute;
 
 - (IBAction)onNextButton:(id)sender;
 - (IBAction)onPreviousButton:(id)sender;
@@ -58,7 +59,9 @@
 - (void)didFinishCalculatingRoutes:(NSNotification *) notification {
     NSDictionary *data = notification.userInfo;
     if ([data[kKeyPhotoWalkId] isEqualToString:self.photoWalk.photoWalkId]) {
-        [self addRoutesOverlayForRoutes:data[kKeyRoutes]];
+        self.routes = data[kKeyRoutes];
+        self.currentRoute = [self.routes firstObject];
+        [self addRoutesOverlayForRoutes:self.routes];
     }
 }
 
@@ -97,43 +100,72 @@
     }
     MKPolyline *polyline = overlay;
     MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithPolyline:polyline];
-    renderer.strokeColor = [UIColor blueColor];
+    if (polyline == self.currentRoute.polyline) {
+        renderer.strokeColor = [UIColor greenColor];
+    } else {
+        renderer.strokeColor = [UIColor blueColor];
+    }
     renderer.lineWidth = 2.0;
     return renderer;
 }
 
-- (void) redrawAnnotations {
+- (void) redrawMapAnnotations {
     NSArray *annotations = self.mapView.annotations;
     [self.mapView removeAnnotations:self.mapView.annotations];
     [self.mapView addAnnotations:annotations];
+}
+
+- (void) redrawMapOverlays {
+    NSArray *overlays = self.mapView.overlays;
+    [self.mapView removeOverlays:self.mapView.overlays];
+    [self.mapView addOverlays:overlays];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
+- (void) setCurrentRoute:(MKRoute *)currentRoute {
+    _currentRoute = currentRoute;
+    [self redrawMapOverlays];
+}
+
 - (void)setCurrentLocation:(Location *)currentLocation {
     _currentLocation = currentLocation;
     Media *firstPhoto = [currentLocation.photos firstObject];
     [self.photoWalkImage setImageWithURL:[NSURL URLWithString:firstPhoto.url]];
-    [self redrawAnnotations];
+    [self redrawMapAnnotations];
 }
 
 - (IBAction)onNextButton:(id)sender {
+    // Change pin
     NSArray * locations = self.photoWalk.locations;
     NSInteger currentIndex = [locations indexOfObject:self.currentLocation];
     if (currentIndex < locations.count - 1) {
         currentIndex++;
         self.currentLocation = locations[currentIndex];
     }
+    // Change road highlight
+    NSInteger currentRouteIndex = [self.routes indexOfObject:self.currentRoute];
+    if (currentRouteIndex < self.routes.count - 1) {
+        currentRouteIndex++;
+        self.currentRoute = self.routes[currentRouteIndex];
+    }
 }
 
 - (IBAction)onPreviousButton:(id)sender {
+    // Change pin
     NSArray * locations = self.photoWalk.locations;
     NSInteger currentIndex = [locations indexOfObject:self.currentLocation];
     if (currentIndex > 0) {
         currentIndex--;
         self.currentLocation = locations[currentIndex];
+    }
+    // Change road highlight
+    NSInteger currentRouteIndex = [self.routes indexOfObject:self.currentRoute];
+    if (currentRouteIndex > 0) {
+        currentRouteIndex--;
+        self.currentRoute = self.routes[currentRouteIndex];
     }
 }
 @end
