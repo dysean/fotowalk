@@ -14,40 +14,21 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0MG-Y6-hxk">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="349"/>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0MG-Y6-hxk">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="368"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="368" id="6Ry-P5-835"/>
+                    </constraints>
                 </mapView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZeY-Og-n9d" userLabel="Next Button">
-                    <rect key="frame" x="251" y="300" width="55" height="47"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                    <state key="normal" title=">>">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onNextButton:" destination="-1" eventType="touchUpInside" id="nqF-Mm-JeW"/>
-                    </connections>
-                </button>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vXT-sc-09j" userLabel="Drawer View">
-                    <rect key="frame" x="0.0" y="349" width="320" height="156"/>
-                    <subviews>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Npq-Nf-ou5" userLabel="Directions Text View">
-                            <rect key="frame" x="117" y="0.0" width="203" height="156"/>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                        </textView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xFi-1H-kli" userLabel="Photo Image View">
-                            <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UQn-3O-meH" userLabel="Previous Button">
-                    <rect key="frame" x="8" y="300" width="52" height="46"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UQn-3O-meH" userLabel="Previous Button">
+                    <rect key="frame" x="8" y="322" width="52" height="46"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="52" id="Eif-fK-MiL"/>
+                        <constraint firstAttribute="height" constant="46" id="FFX-tO-UsO"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                     <state key="normal" title="&lt;&lt;">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -56,8 +37,67 @@
                         <action selector="onPreviousButton:" destination="-1" eventType="touchUpInside" id="cFk-tP-MLo"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vXT-sc-09j" userLabel="Drawer View">
+                    <rect key="frame" x="0.0" y="368" width="320" height="136"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xFi-1H-kli" userLabel="Photo Image View">
+                            <rect key="frame" x="23" y="23" width="90" height="90"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="90" id="Ga8-rs-gsF"/>
+                                <constraint firstAttribute="height" constant="90" id="LbM-ED-Zq2"/>
+                            </constraints>
+                        </imageView>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Npq-Nf-ou5" userLabel="Directions Text View">
+                            <rect key="frame" x="121" y="15" width="191" height="106"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="106" id="1kE-r8-orP"/>
+                            </constraints>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="Npq-Nf-ou5" firstAttribute="leading" secondItem="xFi-1H-kli" secondAttribute="trailing" constant="8" id="bec-pK-Pls"/>
+                        <constraint firstAttribute="bottom" secondItem="Npq-Nf-ou5" secondAttribute="bottom" constant="15" id="byW-sc-qkM"/>
+                        <constraint firstItem="Npq-Nf-ou5" firstAttribute="top" secondItem="vXT-sc-09j" secondAttribute="top" constant="15" id="kCI-RU-dW5"/>
+                        <constraint firstItem="xFi-1H-kli" firstAttribute="leading" secondItem="vXT-sc-09j" secondAttribute="leading" constant="23" id="oye-jE-BGY"/>
+                        <constraint firstItem="Npq-Nf-ou5" firstAttribute="top" secondItem="xFi-1H-kli" secondAttribute="top" constant="-8" id="tCT-HU-hrp"/>
+                        <constraint firstAttribute="trailing" secondItem="Npq-Nf-ou5" secondAttribute="trailing" constant="8" id="ueS-b8-ms7"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZeY-Og-n9d" userLabel="Next Button">
+                    <rect key="frame" x="257" y="322" width="55" height="46"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="55" id="gB7-j9-56A"/>
+                        <constraint firstAttribute="height" constant="46" id="pND-e5-9Kq"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <state key="normal" title=">>">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onNextButton:" destination="-1" eventType="touchUpInside" id="nqF-Mm-JeW"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="0MG-Y6-hxk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="0Uu-Xc-flJ"/>
+                <constraint firstAttribute="bottom" secondItem="vXT-sc-09j" secondAttribute="bottom" id="6li-A7-UdN"/>
+                <constraint firstItem="vXT-sc-09j" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="CwK-z1-3QG"/>
+                <constraint firstAttribute="trailing" secondItem="ZeY-Og-n9d" secondAttribute="trailing" constant="8" id="QnQ-fE-yUM"/>
+                <constraint firstAttribute="trailing" secondItem="vXT-sc-09j" secondAttribute="trailing" id="TzM-Nd-nLG"/>
+                <constraint firstItem="0MG-Y6-hxk" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Z8g-9L-k2M"/>
+                <constraint firstItem="UQn-3O-meH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="iBX-3K-aEC"/>
+                <constraint firstItem="ZeY-Og-n9d" firstAttribute="bottom" secondItem="0MG-Y6-hxk" secondAttribute="bottom" id="j5d-qv-Deu"/>
+                <constraint firstAttribute="trailing" secondItem="0MG-Y6-hxk" secondAttribute="trailing" id="mfw-Dk-BIa"/>
+                <constraint firstItem="vXT-sc-09j" firstAttribute="top" secondItem="ZeY-Og-n9d" secondAttribute="bottom" id="rKO-il-skj"/>
+                <constraint firstItem="0MG-Y6-hxk" firstAttribute="bottom" secondItem="UQn-3O-meH" secondAttribute="bottom" id="rdR-Da-ksA"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <point key="canvasLocation" x="278" y="344"/>
         </view>
     </objects>
