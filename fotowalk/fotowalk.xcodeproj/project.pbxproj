@@ -24,6 +24,7 @@
 		C1D993A8BCE6120C980319B0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB4EA72D39201F4874500D35 /* libPods.a */; };
 		D101C0111AAAA0CE00791798 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D101C00F1AAAA0CE00791798 /* MainViewController.m */; };
 		D101C0121AAAA0CE00791798 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D101C0101AAAA0CE00791798 /* MainViewController.xib */; };
+		D1CEC2591AB1228200865FF9 /* RouteHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CEC2581AB1228200865FF9 /* RouteHelper.m */; };
 		D1D482FB1AAAA1FC00CA60F7 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D482F91AAAA1FC00CA60F7 /* MapViewController.m */; };
 		D1D482FC1AAAA1FC00CA60F7 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1D482FA1AAAA1FC00CA60F7 /* MapViewController.xib */; };
 		D1D482FE1AAAA32A00CA60F7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1D482FD1AAAA32A00CA60F7 /* MapKit.framework */; };
@@ -74,6 +75,8 @@
 		D101C00E1AAAA0CE00791798 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		D101C00F1AAAA0CE00791798 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		D101C0101AAAA0CE00791798 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		D1CEC2571AB1228200865FF9 /* RouteHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteHelper.h; sourceTree = "<group>"; };
+		D1CEC2581AB1228200865FF9 /* RouteHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteHelper.m; sourceTree = "<group>"; };
 		D1D482F81AAAA1FC00CA60F7 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		D1D482F91AAAA1FC00CA60F7 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		D1D482FA1AAAA1FC00CA60F7 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
@@ -128,6 +131,7 @@
 		24A765581AA8E66300F1CA09 /* fotowalk */ = {
 			isa = PBXGroup;
 			children = (
+				D1CEC2561AB1227200865FF9 /* Helpers */,
 				D1D483011AAAA67D00CA60F7 /* Views */,
 				D1D483001AAAA67200CA60F7 /* Models */,
 				D1D482FF1AAAA66900CA60F7 /* View Controllers */,
@@ -176,6 +180,15 @@
 				096C30F378B30C140A1F465F /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		D1CEC2561AB1227200865FF9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D1CEC2571AB1228200865FF9 /* RouteHelper.h */,
+				D1CEC2581AB1228200865FF9 /* RouteHelper.m */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		D1D482FF1AAAA66900CA60F7 /* View Controllers */ = {
@@ -371,6 +384,7 @@
 				24D333A31AAFE8C900E8A9F5 /* City.m in Sources */,
 				24A7655F1AA8E66300F1CA09 /* AppDelegate.m in Sources */,
 				D1D483041AAAA74400CA60F7 /* Media.m in Sources */,
+				D1CEC2591AB1228200865FF9 /* RouteHelper.m in Sources */,
 				D1D483071AAAA85000CA60F7 /* FotowalkAPIClient.m in Sources */,
 				24194C341AACE345002E5863 /* PhotoWalkTableViewCell.m in Sources */,
 				D101C0111AAAA0CE00791798 /* MainViewController.m in Sources */,

@@ -13,4 +13,5 @@
 @interface MapViewController : UIViewController<MKMapViewDelegate>
 
 @property (nonatomic, strong) PhotoWalk* photoWalk;
+@property (strong, atomic) NSArray *routes;
 @end

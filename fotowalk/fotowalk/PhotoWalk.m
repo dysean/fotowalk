@@ -44,6 +44,7 @@ static CLLocationDegrees const kOffsetSpan = 0.005;
 - (id) initWithDictionary: (NSDictionary *)dictionary {
     self = [super init];
     if (self) {
+        self.photoWalkId = [[NSUUID UUID] UUIDString];
         self.name = dictionary[@"name"];
         self.length = [dictionary[@"length"] floatValue];
 //        

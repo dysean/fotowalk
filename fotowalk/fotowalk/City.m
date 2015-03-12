@@ -61,12 +61,14 @@
             
             // Mission Photo Walk
             PhotoWalk *missionPhotoWalk = [[PhotoWalk alloc] init];
+            missionPhotoWalk.photoWalkId = [[NSUUID UUID] UUIDString];
             missionPhotoWalk.name = @"Mission";
             missionPhotoWalk.length = 300.0; // meters
             missionPhotoWalk.locations = @[doloresPark, balmyAlley, tacolicious];
 
             // Golden Gate Photo Walk
             PhotoWalk *goldenGatePhotoWalk = [[PhotoWalk alloc] init];
+            goldenGatePhotoWalk.photoWalkId = [[NSUUID UUID] UUIDString];
             goldenGatePhotoWalk.name = @"Golden Gate";
             goldenGatePhotoWalk.length = 300.0; // meters
             goldenGatePhotoWalk.locations = @[goldenGate, hawkHill];

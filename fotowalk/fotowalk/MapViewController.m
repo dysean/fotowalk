@@ -12,6 +12,7 @@
 #import "Location.h"
 #import "Media.h"
 #import "UIImageView+AFNetworking.h"
+#import "RouteHelper.h"
 
 @interface MapViewController ()
 
@@ -28,21 +29,8 @@
 
 @implementation MapViewController
 
-- (void)drawLineForLocations:(NSArray *)locations
-{
-    CLLocationCoordinate2D *coordinateArray = (CLLocationCoordinate2D *)malloc([locations count] * sizeof(CLLocationCoordinate2D));
-    
-    for (int i = 0; i < locations.count; i++) {
-        coordinateArray[i] = ((Location*) locations[i]).coordinate;
-    }
-  
-    self.routeLine = [MKPolyline polylineWithCoordinates:coordinateArray count:locations.count];
-    [self.mapView addOverlay:self.routeLine];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.title = @"Photo Walk";
     
     Location *firstLocation = [self.photoWalk.locations firstObject];
@@ -52,8 +40,10 @@
     self.mapView.delegate = self;
     self.mapView.region = [self.mapView regionThatFits:[self.photoWalk region]];
     [self.mapView addAnnotations:self.photoWalk.locations];
-    [self drawLineForLocations:self.photoWalk.locations];
     
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(didFinishCalculatingRoutes:) name:kRoutesAvailableNotification object:nil];
+    [[RouteHelper sharedInstance] queueDirectionCalculation:self.photoWalk];
     /*
     [[FotowalkAPIClient sharedInstance] mediaForLocation: CLLocationCoordinate2DMake(40.730952, 73.991290) completion:^(NSArray *media, NSError *error) {
         if (!error) {
@@ -65,18 +55,36 @@
     */
 }
 
-- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay
-{
-    if(overlay == self.routeLine) {
-        if(nil == self.routeLineView) {
-            self.routeLineView = [[MKPolylineView alloc] initWithPolyline:self.routeLine];
-            self.routeLineView.fillColor = [UIColor redColor];
-            self.routeLineView.strokeColor = [UIColor redColor];
-            self.routeLineView.lineWidth = 5;
-        }
-        return self.routeLineView;
+- (void)didFinishCalculatingRoutes:(NSNotification *) notification {
+    NSDictionary *data = notification.userInfo;
+    if ([data[kKeyPhotoWalkId] isEqualToString:self.photoWalk.photoWalkId]) {
+        [self addRoutesOverlayForRoutes:data[kKeyRoutes]];
     }
-    return nil;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)addRoutesOverlayForRoutes:(NSArray *) routes {
+    NSMutableArray *polylines = [NSMutableArray array];
+    for (MKRoute *route in routes) {
+        [polylines addObject:route.polyline];
+    }
+    [self.mapView addOverlays:polylines];
+}
+
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
+    if (![overlay isKindOfClass:[MKPolyline class]]) {
+        NSLog(@"Error: Unexpected MKOverlay.");
+        return nil;
+    }
+    MKPolyline *polyline = overlay;
+    MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithPolyline:polyline];
+    renderer.strokeColor = [UIColor blueColor];
+    renderer.lineWidth = 2.0;
+    return renderer;
 }
 
 - (void)didReceiveMemoryWarning {

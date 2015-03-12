@@ -12,6 +12,7 @@
 
 @interface PhotoWalk : NSObject
 
+@property (nonatomic, strong) NSString *photoWalkId;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, assign) CGFloat length;
 @property (nonatomic, strong) NSArray *locations;
