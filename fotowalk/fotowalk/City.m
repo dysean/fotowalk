@@ -63,12 +63,22 @@
             hawkHill.coordinate = CLLocationCoordinate2DMake(37.825594, -122.499406);
             hawkHill.locationDescription = @"San Francisco bikers and hikers alike love going up here to see the wonderful view overlooking the Golden Gate Bridge";
             hawkHill.photos = @[photoAtHawkHill];
+            
+            // Sausalito
+            Media *photoAtSausalito = [[Media alloc] init];
+            photoAtSausalito.url = @"https://igcdn-photos-h-a.akamaihd.net/hphotos-ak-xaf1/t51.2885-15/11017588_1685424068351503_451005744_n.jpg";
+            Location *sausalito = [[Location alloc] init];
+            sausalito.name = @"Sausalito";
+            sausalito.coordinate = CLLocationCoordinate2DMake(37.861196, -122.487856);
+            sausalito.locationDescription = @"Sausalito is a San Francisco Bay Area city in Marin County, California. Sausalito is 8 miles south-southeast of San Rafael, at an elevation of 13 feet.";
+            sausalito.photos = @[photoAtSausalito];
 
             // Clarion Alley
             Media *photoAtClarionAlley = [[Media alloc] init];
             photoAtClarionAlley.url = @"https://igcdn-photos-d-a.akamaihd.net/hphotos-ak-xaf1/t51.2885-15/10986090_1565543290396779_1090682747_n.jpg";
             Location *clarionAlley = [[Location alloc] init];
             clarionAlley.name = @"Clarion Alley";
+            clarionAlley.locationDescription = @"Clarion Alley is a small street in San Francisco between Mission and Valencia Streets and 17th and 18th Streets, notable for the murals painted by the Clarion Alley Mural Project.";
             clarionAlley.coordinate = CLLocationCoordinate2DMake(37.763176, -122.419529);
             clarionAlley.photos = @[photoAtClarionAlley];
 
@@ -77,6 +87,7 @@
             photoAtGravelAndGold.url = @"https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpa1/t51.2885-15/10576039_556757027779521_2135052316_n.jpg";
             Location *gravelAndGold = [[Location alloc] init];
             gravelAndGold.name = @"Gravel and Gold";
+            gravelAndGold.locationDescription = @"Funky boutique offering artisanal home goods, bags, accessories & clothing, plus in-store workshops.";
             gravelAndGold.coordinate = CLLocationCoordinate2DMake(37.757421, -122.420539);
             gravelAndGold.photos = @[photoAtGravelAndGold];
 
@@ -91,8 +102,8 @@
             PhotoWalk *goldenGatePhotoWalk = [[PhotoWalk alloc] init];
             goldenGatePhotoWalk.photoWalkId = [[NSUUID UUID] UUIDString];
             goldenGatePhotoWalk.name = @"Golden Gate";
-            goldenGatePhotoWalk.length = 6.6; // kilometers
-            goldenGatePhotoWalk.locations = @[goldenGate, hawkHill];
+            goldenGatePhotoWalk.length = 6.6 + 6.3; // kilometers
+            goldenGatePhotoWalk.locations = @[goldenGate, hawkHill, sausalito];
             
             NSDictionary *cityDictionary = @{@"San Francisco" : @[missionPhotoWalk, goldenGatePhotoWalk], @"New York City" : @[missionPhotoWalk]};
             
