@@ -128,6 +128,18 @@ static CGFloat const kPhotoHeight = 200;
     return cell;
 }
 
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
+    if (![overlay isKindOfClass:[MKPolyline class]]) {
+        NSLog(@"Error: Unexpected MKOverlay.");
+        return nil;
+    }
+    MKPolyline *polyline = overlay;
+    MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithPolyline:polyline];
+    renderer.strokeColor = [UIColor blueColor];
+    renderer.lineWidth = 2.0;
+    return renderer;
+}
+
 - (void)collectionViewLayout:(FWCollectionViewLayout *)collectionViewLayout willHighlightCellAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.highlightedIndexPath isEqual:indexPath]) {
         return;

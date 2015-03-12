@@ -65,7 +65,6 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self removeObserver:self forKeyPath:@"location"];
 }
 
 - (void)addRoutesOverlayForRoutes:(NSArray *) routes {
