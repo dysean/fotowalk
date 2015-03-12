@@ -63,13 +63,29 @@
             hawkHill.coordinate = CLLocationCoordinate2DMake(37.825594, -122.499406);
             hawkHill.locationDescription = @"San Francisco bikers and hikers alike love going up here to see the wonderful view overlooking the Golden Gate Bridge";
             hawkHill.photos = @[photoAtHawkHill];
-            
+
+            // Clarion Alley
+            Media *photoAtClarionAlley = [[Media alloc] init];
+            photoAtClarionAlley.url = @"https://igcdn-photos-d-a.akamaihd.net/hphotos-ak-xaf1/t51.2885-15/10986090_1565543290396779_1090682747_n.jpg";
+            Location *clarionAlley = [[Location alloc] init];
+            clarionAlley.name = @"Clarion Alley";
+            clarionAlley.coordinate = CLLocationCoordinate2DMake(37.763176, -122.419529);
+            clarionAlley.photos = @[photoAtClarionAlley];
+
+            // Gravel and Gold
+            Media *photoAtGravelAndGold = [[Media alloc] init];
+            photoAtGravelAndGold.url = @"https://igcdn-photos-b-a.akamaihd.net/hphotos-ak-xpa1/t51.2885-15/10576039_556757027779521_2135052316_n.jpg";
+            Location *gravelAndGold = [[Location alloc] init];
+            gravelAndGold.name = @"Gravel and Gold";
+            gravelAndGold.coordinate = CLLocationCoordinate2DMake(37.757421, -122.420539);
+            gravelAndGold.photos = @[photoAtGravelAndGold];
+
             // Mission Photo Walk
             PhotoWalk *missionPhotoWalk = [[PhotoWalk alloc] init];
             missionPhotoWalk.photoWalkId = [[NSUUID UUID] UUIDString];
             missionPhotoWalk.name = @"Mission";
             missionPhotoWalk.length = 4.1; // kilometers
-            missionPhotoWalk.locations = @[doloresPark, balmyAlley, tacolicious];
+            missionPhotoWalk.locations = @[doloresPark, tacolicious, clarionAlley, gravelAndGold, balmyAlley];
 
             // Golden Gate Photo Walk
             PhotoWalk *goldenGatePhotoWalk = [[PhotoWalk alloc] init];
