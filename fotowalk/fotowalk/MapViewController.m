@@ -86,7 +86,7 @@
     MKPinAnnotationView *annView=[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pin"];
     if ([annotation isKindOfClass:[Location class]]) {
         Location *currentAnnotation = (Location *) annotation;
-        if (currentAnnotation == self.currentLocation) {
+        if ([currentAnnotation isEqual:self.currentLocation]) {
             annView.pinColor = MKPinAnnotationColorGreen;
         }
     }
