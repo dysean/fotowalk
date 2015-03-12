@@ -10,7 +10,7 @@
 
 @class FWCollectionViewLayout;
 
-@protocol FWCollectionViewLayoutDelegate <NSObject>
+@protocol FWCollectionViewLayoutDelegate <UICollectionViewDelegateFlowLayout>
 
 - (void)collectionViewLayout:(FWCollectionViewLayout *)collectionViewLayout
 willHighlightCellAtIndexPath:(NSIndexPath *)indexPath;

@@ -34,6 +34,7 @@ static CGFloat const kCellWidth = 220;
 static CGFloat const kCellHeight = 220;
 static CGFloat const kPhotoWidth = 150;
 static CGFloat const kPhotoHeight = 150;
+static CGFloat const kMarginRight = 20;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -96,6 +97,18 @@ static CGFloat const kPhotoHeight = 150;
     return 1;
 }
 
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    CGFloat totalWidth = self.view.bounds.size.width;
+    CGFloat leftMargin = (totalWidth / 2) - (kPhotoWidth / 2);
+    if (section == 0) {
+        return UIEdgeInsetsMake(0, leftMargin, 0, 0);
+    } else if (section == self.photoWalk.locations.count - 1) {
+        CGFloat rightMargin = (totalWidth / 2) - kCellWidth + (kPhotoWidth / 2);
+        return UIEdgeInsetsMake(0, 0, 0, rightMargin);
+    }
+    return UIEdgeInsetsZero;
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"LocationCell" forIndexPath:indexPath];
 
@@ -119,7 +132,7 @@ static CGFloat const kPhotoHeight = 150;
         locationPhoto.contentMode = UIViewContentModeScaleAspectFill;
         [cell.contentView addSubview:locationPhoto];
         
-        locationDescription = [[UILabel alloc] initWithFrame:CGRectMake(0, kPhotoHeight + 20, kPhotoWidth, kCellHeight - kPhotoHeight - 20)];
+        locationDescription = [[UILabel alloc] initWithFrame:CGRectMake(0, kPhotoHeight + kMarginRight, kPhotoWidth, kCellHeight - kPhotoHeight - kMarginRight)];
         //locationDescription.center = CGPointMake(kPhotoWidth / 2.0, 10);
         locationDescription.font = [UIFont systemFontOfSize:12];
         locationDescription.textColor = [UIColor whiteColor];

@@ -38,10 +38,10 @@ static CGFloat const kMarginRight = 20;
 
         if (distance > 0 && distancePercent < kMaxDistanceForVisible) {
             layoutAttributes.alpha = 1;
-            layoutAttributes.transform = CGAffineTransformMakeScale(1.0, 1.0);
+            layoutAttributes.transform = CGAffineTransformMakeScale(.9, .9);
         } else {
             layoutAttributes.alpha = 1 - (distancePercent - kMaxDistanceForVisible) * 0.8;
-            CGFloat scale = 1 - (distancePercent - kMaxDistanceForVisible) * 0.8;
+            CGFloat scale = .9 - (distancePercent - kMaxDistanceForVisible) * 0.8;
             layoutAttributes.transform = CGAffineTransformMakeScale(scale, scale);
 
         }
