@@ -39,6 +39,7 @@
     PhotoWalk *currentWalk = self.photoWalk;
     NSLog(@"%@",currentWalk.name);
     self.walkNameLabel.text = currentWalk.name;
+    self.walkDistanceLabel.text = [NSString stringWithFormat:@"%0.fmi", currentWalk.length/1.6];
     
     Location *firstLocation = currentWalk.locations[0];
     Media *firstPhoto = firstLocation.photos[0];

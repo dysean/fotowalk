@@ -111,17 +111,17 @@ static CGFloat const kPhotoHeight = 200;
         title.textColor = [UIColor whiteColor];
         [cell.contentView addSubview:title];
 
-        locationDescription = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kPhotoWidth, 30)];
-        //locationDescription.center = CGPointMake(kPhotoWidth / 2.0, 10);
-        locationDescription.font = [UIFont systemFontOfSize:12];
-        locationDescription.textColor = [UIColor whiteColor];
-        [cell.contentView addSubview:locationDescription];
-
-        
         locationPhoto = [[UIImageView alloc] initWithFrame:CGRectMake(0, 20, kPhotoWidth, kPhotoHeight)];
         locationPhoto.clipsToBounds = YES;
         locationPhoto.contentMode = UIViewContentModeScaleAspectFill;
         [cell.contentView addSubview:locationPhoto];
+        
+        locationDescription = [[UILabel alloc] initWithFrame:CGRectMake(0, kPhotoHeight + 20, kPhotoWidth, 100)];
+        //locationDescription.center = CGPointMake(kPhotoWidth / 2.0, 10);
+        locationDescription.font = [UIFont systemFontOfSize:12];
+        locationDescription.textColor = [UIColor whiteColor];
+        [cell.contentView addSubview:locationDescription];
+        
     } else {
         NSLog(@"Houston, we have a problem!!!");
     }
@@ -132,6 +132,10 @@ static CGFloat const kPhotoHeight = 200;
     title.text = location.name;
     [title sizeToFit];
     title.center = CGPointMake(kPhotoWidth / 2.0, 10);
+    locationDescription.text = location.locationDescription;
+    locationDescription.numberOfLines =3;
+    locationDescription.lineBreakMode = NSLineBreakByWordWrapping;
+    [locationDescription sizeToFit];
     [locationPhoto setImageWithURL:[NSURL URLWithString:firstPhoto.url]];
 
     return cell;

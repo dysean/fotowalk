@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewController">
@@ -17,36 +17,54 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0MG-Y6-hxk">
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0MG-Y6-hxk">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="349"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="349" id="9PH-xK-gVh"/>
+                        <constraint firstAttribute="width" constant="320" id="qRB-gF-VDv"/>
+                    </constraints>
                 </mapView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZeY-Og-n9d" userLabel="Next Button">
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZeY-Og-n9d" userLabel="Next Button">
                     <rect key="frame" x="251" y="300" width="55" height="47"/>
                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                    <state key="normal" title=">>">
+                    <state key="normal" title="&gt;&gt;">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="onNextButton:" destination="-1" eventType="touchUpInside" id="nqF-Mm-JeW"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vXT-sc-09j" userLabel="Drawer View">
-                    <rect key="frame" x="0.0" y="349" width="320" height="156"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vXT-sc-09j" userLabel="Drawer View">
+                    <rect key="frame" x="0.0" y="349" width="320" height="219"/>
                     <subviews>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Npq-Nf-ou5" userLabel="Directions Text View">
-                            <rect key="frame" x="117" y="0.0" width="203" height="156"/>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Npq-Nf-ou5" userLabel="Directions Text View">
+                            <rect key="frame" x="117" y="0.0" width="203" height="219"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="219" id="YSU-w4-dqM"/>
+                                <constraint firstAttribute="width" constant="203" id="yGq-Bf-WDG"/>
+                            </constraints>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xFi-1H-kli" userLabel="Photo Image View">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xFi-1H-kli" userLabel="Photo Image View">
                             <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="120" id="0pw-vI-cku"/>
+                                <constraint firstAttribute="width" constant="120" id="mFM-5d-zj5"/>
+                            </constraints>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="xFi-1H-kli" firstAttribute="top" secondItem="vXT-sc-09j" secondAttribute="top" id="Mwl-kI-bL2"/>
+                        <constraint firstItem="Npq-Nf-ou5" firstAttribute="top" secondItem="vXT-sc-09j" secondAttribute="top" id="OqW-V5-3KZ"/>
+                        <constraint firstItem="Npq-Nf-ou5" firstAttribute="leading" secondItem="vXT-sc-09j" secondAttribute="leading" constant="117" id="a93-Y5-bJd"/>
+                        <constraint firstItem="xFi-1H-kli" firstAttribute="leading" secondItem="vXT-sc-09j" secondAttribute="leading" id="dFf-AG-vci"/>
+                    </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UQn-3O-meH" userLabel="Previous Button">
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UQn-3O-meH" userLabel="Previous Button">
                     <rect key="frame" x="8" y="300" width="52" height="46"/>
                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                     <state key="normal" title="&lt;&lt;">
@@ -58,6 +76,19 @@
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="vXT-sc-09j" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="0rt-Rw-lBX"/>
+                <constraint firstItem="0MG-Y6-hxk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Das-Rm-DNe"/>
+                <constraint firstItem="vXT-sc-09j" firstAttribute="top" secondItem="0MG-Y6-hxk" secondAttribute="bottom" id="Hfq-hH-Zhg"/>
+                <constraint firstItem="UQn-3O-meH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="Ov8-N3-JSU"/>
+                <constraint firstAttribute="trailing" secondItem="0MG-Y6-hxk" secondAttribute="trailing" id="Slx-bb-hUk"/>
+                <constraint firstAttribute="bottom" secondItem="vXT-sc-09j" secondAttribute="bottom" id="YAw-yj-N6f"/>
+                <constraint firstItem="0MG-Y6-hxk" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="afv-eX-sjd"/>
+                <constraint firstAttribute="trailing" secondItem="ZeY-Og-n9d" secondAttribute="trailing" constant="14" id="jKx-Jl-XKN"/>
+                <constraint firstItem="ZeY-Og-n9d" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="300" id="m5A-HI-UZS"/>
+                <constraint firstItem="UQn-3O-meH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="300" id="pVs-Wm-wot"/>
+                <constraint firstAttribute="trailing" secondItem="vXT-sc-09j" secondAttribute="trailing" id="wb6-om-WhE"/>
+            </constraints>
             <point key="canvasLocation" x="278" y="344"/>
         </view>
     </objects>

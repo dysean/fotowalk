@@ -22,9 +22,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.mainTableView.backgroundColor = [UIColor blackColor];
     self.currentCity = @"San Francisco";
     
+    self.navigationController.navigationBar.backgroundColor = [UIColor blackColor];
     self.title = self.currentCity;
 
     self.cityDictionary = [City defaultCityDictionary];

@@ -17,15 +17,15 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hYc-VC-1QO">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="233"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="200" id="119-jr-HIF"/>
+                        <constraint firstAttribute="height" constant="233" id="119-jr-HIF"/>
                     </constraints>
                 </mapView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="iYd-K0-Fxn">
-                    <rect key="frame" x="0.0" y="200" width="320" height="248"/>
+                    <rect key="frame" x="0.0" y="232" width="320" height="216"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="248" id="eXY-R5-cxI"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="216" id="eXY-R5-cxI"/>
                     </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Agw-H6-zQh">
                         <size key="itemSize" width="50" height="50"/>
@@ -56,7 +56,7 @@
                 <constraint firstItem="iYd-K0-Fxn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Mh8-zO-M9y"/>
                 <constraint firstItem="z85-lv-ts2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="OOM-Cp-8C3"/>
                 <constraint firstAttribute="trailing" secondItem="hYc-VC-1QO" secondAttribute="trailing" id="Q9L-2S-sF8"/>
-                <constraint firstItem="iYd-K0-Fxn" firstAttribute="top" secondItem="hYc-VC-1QO" secondAttribute="bottom" id="W0r-GF-AwK"/>
+                <constraint firstItem="iYd-K0-Fxn" firstAttribute="top" secondItem="hYc-VC-1QO" secondAttribute="bottom" constant="-1" id="W0r-GF-AwK"/>
                 <constraint firstItem="hYc-VC-1QO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ww3-b0-1wX"/>
                 <constraint firstItem="z85-lv-ts2" firstAttribute="top" secondItem="iYd-K0-Fxn" secondAttribute="bottom" constant="8" id="cn8-S0-UQH"/>
                 <constraint firstAttribute="trailing" secondItem="z85-lv-ts2" secondAttribute="trailing" constant="8" id="jXn-S2-2WX"/>

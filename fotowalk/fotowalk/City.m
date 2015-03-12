@@ -25,6 +25,7 @@
             Location *doloresPark = [[Location alloc] init];
             doloresPark.name = @"Dolores Park";
             doloresPark.coordinate = CLLocationCoordinate2DMake(37.760006, -122.427074);
+            doloresPark.locationDescription = @"Dolores Park is the iconic park where SF locals picnic, hangout in the sun, and smoke...not weed.";
             doloresPark.photos = @[photoAtDolores];
             
             // Balmy Alley
@@ -33,6 +34,7 @@
             Location *balmyAlley = [[Location alloc] init];
             balmyAlley.name = @"Balmy Alley";
             balmyAlley.coordinate = CLLocationCoordinate2DMake(37.751884, -122.412366);
+            balmyAlley.locationDescription = @"Vandals! These crazy SF Vandals! They make amazing murals though.";
             balmyAlley.photos = @[photoAtBalmyAlley];
             
             // Tacolicious
@@ -40,6 +42,7 @@
             photoAtTacolicious.url = @"https://igcdn-photos-e-a.akamaihd.net/hphotos-ak-xaf1/t51.2885-15/11008287_1554038204859724_452106543_n.jpg";
             Location *tacolicious = [[Location alloc] init];
             tacolicious.name = @"Tacolicious";
+            tacolicious.locationDescription = @"Mission Mexican food is the best. Hit the nearby bars and grab some late night burritos.";
             tacolicious.coordinate = CLLocationCoordinate2DMake(37.761089, -122.421346);
             tacolicious.photos = @[photoAtTacolicious];
             
@@ -48,6 +51,7 @@
             photoAtGG.url = @"https://igcdn-photos-d-a.akamaihd.net/hphotos-ak-xaf1/t51.2885-15/10788004_309694562555483_934540193_n.jpg";
             Location *goldenGate = [[Location alloc] init];
             goldenGate.name = @"Golden Gate Bridge";
+            goldenGate.locationDescription = @"The iconic Golden Gate bridge. Opened in 1937, it now carries 6 lanes of the US 101 highway.";
             goldenGate.coordinate = CLLocationCoordinate2DMake(37.820132, -122.478684);
             goldenGate.photos = @[photoAtGG];
             
@@ -57,20 +61,21 @@
             Location *hawkHill = [[Location alloc] init];
             hawkHill.name = @"Hawk Hill";
             hawkHill.coordinate = CLLocationCoordinate2DMake(37.825594, -122.499406);
+            hawkHill.locationDescription = @"San Francisco bikers and hikers alike love going up here to see the wonderful view overlooking the Golden Gate Bridge";
             hawkHill.photos = @[photoAtHawkHill];
             
             // Mission Photo Walk
             PhotoWalk *missionPhotoWalk = [[PhotoWalk alloc] init];
             missionPhotoWalk.photoWalkId = [[NSUUID UUID] UUIDString];
             missionPhotoWalk.name = @"Mission";
-            missionPhotoWalk.length = 300.0; // meters
+            missionPhotoWalk.length = 4.1; // kilometers
             missionPhotoWalk.locations = @[doloresPark, balmyAlley, tacolicious];
 
             // Golden Gate Photo Walk
             PhotoWalk *goldenGatePhotoWalk = [[PhotoWalk alloc] init];
             goldenGatePhotoWalk.photoWalkId = [[NSUUID UUID] UUIDString];
             goldenGatePhotoWalk.name = @"Golden Gate";
-            goldenGatePhotoWalk.length = 300.0; // meters
+            goldenGatePhotoWalk.length = 6.6; // kilometers
             goldenGatePhotoWalk.locations = @[goldenGate, hawkHill];
             
             NSDictionary *cityDictionary = @{@"San Francisco" : @[missionPhotoWalk, goldenGatePhotoWalk], @"New York City" : @[missionPhotoWalk]};
