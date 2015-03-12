@@ -243,17 +243,6 @@ static CGFloat const kMarginRight = 20;
     pinView.pinColor = MKPinAnnotationColorGreen;
 }
 
-- (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation {
-    MKPinAnnotationView *annView=[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pin"];
-    if ([annotation isKindOfClass:[Location class]]) {
-        Location *currentAnnotation = (Location *) annotation;
-        if ([currentAnnotation isEqual:self.currentLocation]) {
-            annView.pinColor = MKPinAnnotationColorGreen;
-        }
-    }
-    return annView;
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
