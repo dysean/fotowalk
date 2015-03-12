@@ -35,13 +35,11 @@
     [super viewDidLoad];
     self.title = @"Photo Walk";
     
-    Location *firstLocation = [self.photoWalk.locations firstObject];
-    Media *firstPhoto = [firstLocation.photos firstObject];
-    [self.photoWalkImage setImageWithURL:[NSURL URLWithString:firstPhoto.url]];
-    
     self.mapView.delegate = self;
     self.mapView.region = [self.mapView regionThatFits:[self.photoWalk region]];
     [self.mapView addAnnotations:self.photoWalk.locations];
+    
+    self.currentLocation = [self.photoWalk.locations firstObject];
     
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(didFinishCalculatingRoutes:) name:kRoutesAvailableNotification object:nil];
@@ -67,6 +65,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self removeObserver:self forKeyPath:@"location"];
 }
 
 - (void)addRoutesOverlayForRoutes:(NSArray *) routes {
@@ -90,7 +89,6 @@
 
 - (void) setPhotoWalk:(PhotoWalk *)photoWalk {
     _photoWalk = photoWalk;
-    _currentLocation = [photoWalk.locations firstObject];
 }
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
@@ -115,13 +113,19 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)setCurrentLocation:(Location *)currentLocation {
+    _currentLocation = currentLocation;
+    Media *firstPhoto = [currentLocation.photos firstObject];
+    [self.photoWalkImage setImageWithURL:[NSURL URLWithString:firstPhoto.url]];
+    [self redrawAnnotations];
+}
+
 - (IBAction)onNextButton:(id)sender {
     NSArray * locations = self.photoWalk.locations;
     NSInteger currentIndex = [locations indexOfObject:self.currentLocation];
     if (currentIndex < locations.count - 1) {
         currentIndex++;
         self.currentLocation = locations[currentIndex];
-        [self redrawAnnotations];
     }
 }
 
@@ -131,7 +135,6 @@
     if (currentIndex > 0) {
         currentIndex--;
         self.currentLocation = locations[currentIndex];
-        [self redrawAnnotations];
     }
 }
 @end
