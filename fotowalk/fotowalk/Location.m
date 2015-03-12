@@ -10,6 +10,15 @@
 
 @implementation Location
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.locationId = [[NSUUID UUID] UUIDString];
+    }
+    return self;
+}
+
 - (NSString *)title {
     return self.name;
 }

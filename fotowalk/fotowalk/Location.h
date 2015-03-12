@@ -12,6 +12,7 @@
 
 @interface Location : NSObject <MKAnnotation>
 
+@property (nonatomic, strong) NSString *locationId;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
 @property (nonatomic, strong) NSArray *photos;

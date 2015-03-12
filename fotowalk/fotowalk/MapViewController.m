@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *photoWalkImage;
 @property (weak, nonatomic) IBOutlet UITextView *directions;
 
+@property (assign, nonatomic) Location *currentLocation;
+
 - (IBAction)onNextButton:(id)sender;
 - (IBAction)onPreviousButton:(id)sender;
 
@@ -73,6 +75,22 @@
         [polylines addObject:route.polyline];
     }
     [self.mapView addOverlays:polylines];
+}
+
+- (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation {
+    MKPinAnnotationView *annView=[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pin"];
+    if ([annotation isKindOfClass:[Location class]]) {
+        Location *currentAnnotation = (Location *) annotation;
+        if (currentAnnotation == self.currentLocation) {
+            annView.pinColor = MKPinAnnotationColorGreen;
+        }
+    }
+    return annView;
+}
+
+- (void) setPhotoWalk:(PhotoWalk *)photoWalk {
+    _photoWalk = photoWalk;
+    _currentLocation = [photoWalk.locations firstObject];
 }
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
