@@ -105,15 +105,33 @@
     return renderer;
 }
 
+- (void) redrawAnnotations {
+    NSArray *annotations = self.mapView.annotations;
+    [self.mapView removeAnnotations:self.mapView.annotations];
+    [self.mapView addAnnotations:annotations];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
 - (IBAction)onNextButton:(id)sender {
-    NSLog(@"onNextButton");
+    NSArray * locations = self.photoWalk.locations;
+    NSInteger currentIndex = [locations indexOfObject:self.currentLocation];
+    if (currentIndex < locations.count - 1) {
+        currentIndex++;
+        self.currentLocation = locations[currentIndex];
+        [self redrawAnnotations];
+    }
 }
 
 - (IBAction)onPreviousButton:(id)sender {
-    NSLog(@"onPreviousButton");
+    NSArray * locations = self.photoWalk.locations;
+    NSInteger currentIndex = [locations indexOfObject:self.currentLocation];
+    if (currentIndex > 0) {
+        currentIndex--;
+        self.currentLocation = locations[currentIndex];
+        [self redrawAnnotations];
+    }
 }
 @end
