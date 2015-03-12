@@ -148,8 +148,9 @@ static CGFloat const kPhotoHeight = 200;
     }
     MKPolyline *polyline = overlay;
     MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithPolyline:polyline];
+    renderer.alpha = 0.2;
     renderer.strokeColor = [UIColor blueColor];
-    renderer.lineWidth = 2.0;
+    renderer.lineWidth = 3.0;
     return renderer;
 }
 

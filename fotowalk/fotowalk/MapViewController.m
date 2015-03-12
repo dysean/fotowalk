@@ -40,8 +40,12 @@
     self.mapView.delegate = self;
     self.mapView.region = [self.mapView regionThatFits:[self.photoWalk region]];
     [self.mapView addAnnotations:self.photoWalk.locations];
+
+    self.photoWalkImage.layer.cornerRadius = 8;
+    self.photoWalkImage.clipsToBounds = YES;
     
     self.currentLocation = [self.photoWalk.locations firstObject];
+    self.currentRoute = nil;
     
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(didFinishCalculatingRoutes:) name:kRoutesAvailableNotification object:nil];
@@ -82,7 +86,7 @@
     MKPinAnnotationView *annView=[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pin"];
     if ([annotation isKindOfClass:[Location class]]) {
         Location *currentAnnotation = (Location *) annotation;
-        if (currentAnnotation == self.currentLocation) {
+        if ([currentAnnotation isEqual:self.currentLocation]) {
             annView.pinColor = MKPinAnnotationColorGreen;
         }
     }
@@ -100,7 +104,7 @@
     }
     MKPolyline *polyline = overlay;
     MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithPolyline:polyline];
-    if (polyline == self.currentRoute.polyline) {
+    if ([polyline isEqual:self.currentRoute.polyline]) {
         renderer.alpha = 0.6;
         renderer.strokeColor = [UIColor greenColor];
     } else {
@@ -135,7 +139,13 @@
         MKRouteStep *step = currentRoute.steps[i];
         [instructions appendString:[NSString stringWithFormat:@"%d. %@\n", (i+1), step.instructions]];
     }
+
+    if (currentRoute == nil) {
+        instructions = [NSMutableString stringWithFormat:@"1. Proceed to %@", self.currentLocation.name];
+    }
+
     self.directions.text = instructions;
+
     [self redrawMapOverlays];
 }
 
