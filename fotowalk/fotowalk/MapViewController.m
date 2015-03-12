@@ -10,13 +10,19 @@
 #import "FotowalkAPIClient.h"
 #import "PhotoWalk.h"
 #import "Location.h"
+#import "Media.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface MapViewController ()
 
-@property (strong, nonatomic) PhotoWalk *photoWalk;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) MKPolyline *routeLine;
 @property (strong, nonatomic) MKPolylineView *routeLineView;
+@property (weak, nonatomic) IBOutlet UIImageView *photoWalkImage;
+@property (weak, nonatomic) IBOutlet UITextView *directions;
+
+- (IBAction)onNextButton:(id)sender;
+- (IBAction)onPreviousButton:(id)sender;
 
 @end
 
@@ -37,9 +43,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    self.photoWalk = [PhotoWalk defaultPhotoWalk];
-
     self.title = @"Photo Walk";
+    
+    Location *firstLocation = [self.photoWalk.locations firstObject];
+    Media *firstPhoto = [firstLocation.photos firstObject];
+    [self.photoWalkImage setImageWithURL:[NSURL URLWithString:firstPhoto.url]];
     
     self.mapView.delegate = self;
     self.mapView.region = [self.mapView regionThatFits:[self.photoWalk region]];
@@ -75,4 +83,11 @@
     [super didReceiveMemoryWarning];
 }
 
+- (IBAction)onNextButton:(id)sender {
+    NSLog(@"onNextButton");
+}
+
+- (IBAction)onPreviousButton:(id)sender {
+    NSLog(@"onPreviousButton");
+}
 @end

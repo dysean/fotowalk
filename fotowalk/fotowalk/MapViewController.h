@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "PhotoWalk.h"
 
 @interface MapViewController : UIViewController<MKMapViewDelegate>
 
+@property (nonatomic, strong) PhotoWalk* photoWalk;
 @end

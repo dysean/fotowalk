@@ -208,6 +208,7 @@ static CGFloat const kPhotoHeight = 200;
 
 - (IBAction)onGo:(id)sender {
     MapViewController *mapController = [[MapViewController alloc] init];
+    mapController.photoWalk = self.photoWalk;
     [self.navigationController pushViewController:mapController animated:YES];
 }
 
