@@ -36,6 +36,7 @@
     [super viewDidLoad];
     self.title = @"Photo Walk";
     
+    self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self;
     self.mapView.region = [self.mapView regionThatFits:[self.photoWalk region]];
     [self.mapView addAnnotations:self.photoWalk.locations];
@@ -101,11 +102,13 @@
     MKPolyline *polyline = overlay;
     MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithPolyline:polyline];
     if (polyline == self.currentRoute.polyline) {
+        renderer.alpha = 0.6;
         renderer.strokeColor = [UIColor greenColor];
     } else {
+        renderer.alpha = 0.2;
         renderer.strokeColor = [UIColor blueColor];
     }
-    renderer.lineWidth = 2.0;
+    renderer.lineWidth = 5.0;
     return renderer;
 }
 
@@ -127,6 +130,13 @@
 
 - (void) setCurrentRoute:(MKRoute *)currentRoute {
     _currentRoute = currentRoute;
+
+    NSMutableString *instructions = [[NSMutableString alloc] init];
+    for (int i = 0; i < currentRoute.steps.count; i++) {
+        MKRouteStep *step = currentRoute.steps[i];
+        [instructions appendString:[NSString stringWithFormat:@"%d. %@\n", (i+1), step.instructions]];
+    }
+    self.directions.text = instructions;
     [self redrawMapOverlays];
 }
 
