@@ -61,7 +61,6 @@
     NSDictionary *data = notification.userInfo;
     if ([data[kKeyPhotoWalkId] isEqualToString:self.photoWalk.photoWalkId]) {
         self.routes = data[kKeyRoutes];
-        self.currentRoute = [self.routes firstObject];
         [self addRoutesOverlayForRoutes:self.routes];
     }
 }
@@ -156,10 +155,14 @@
         self.currentLocation = locations[currentIndex];
     }
     // Change road highlight
-    NSInteger currentRouteIndex = [self.routes indexOfObject:self.currentRoute];
-    if (currentRouteIndex < self.routes.count - 1) {
-        currentRouteIndex++;
-        self.currentRoute = self.routes[currentRouteIndex];
+    if (self.currentRoute == nil) {
+        self.currentRoute = [self.routes firstObject];
+    } else {
+        NSInteger currentRouteIndex = [self.routes indexOfObject:self.currentRoute];
+        if (currentRouteIndex < self.routes.count - 1) {
+            currentRouteIndex++;
+            self.currentRoute = self.routes[currentRouteIndex];
+        }
     }
 }
 
@@ -173,9 +176,11 @@
     }
     // Change road highlight
     NSInteger currentRouteIndex = [self.routes indexOfObject:self.currentRoute];
-    if (currentRouteIndex > 0) {
+    if (currentRouteIndex != NSNotFound && currentRouteIndex > 0) {
         currentRouteIndex--;
         self.currentRoute = self.routes[currentRouteIndex];
+    } else if (currentRouteIndex == 0) {
+        self.currentRoute = nil;
     }
 }
 @end
