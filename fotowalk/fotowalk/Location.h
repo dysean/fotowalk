@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
 @property (nonatomic, strong) NSArray *photos;
+@property (nonatomic, strong) NSString *locationDescription;
 
 - (NSString *)title;
 

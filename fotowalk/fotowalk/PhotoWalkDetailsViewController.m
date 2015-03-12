@@ -98,17 +98,26 @@ static CGFloat const kPhotoHeight = 200;
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"LocationCell" forIndexPath:indexPath];
 
     UILabel *title;
+    UILabel *locationDescription;
     UIImageView *locationPhoto;
-    if (cell.contentView.subviews.count == 2) {
+    if (cell.contentView.subviews.count == 3) {
         title = cell.contentView.subviews[0];
         locationPhoto = cell.contentView.subviews[1];
+        locationDescription = cell.contentView.subviews[2];
     } else if (cell.contentView.subviews.count == 0) {
         title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kPhotoWidth, 15)];
         title.center = CGPointMake(kPhotoWidth / 2.0, 10);
-        title.font = [UIFont systemFontOfSize:12];
+        title.font = [UIFont systemFontOfSize:20];
         title.textColor = [UIColor whiteColor];
         [cell.contentView addSubview:title];
 
+        locationDescription = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kPhotoWidth, 30)];
+        //locationDescription.center = CGPointMake(kPhotoWidth / 2.0, 10);
+        locationDescription.font = [UIFont systemFontOfSize:12];
+        locationDescription.textColor = [UIColor whiteColor];
+        [cell.contentView addSubview:locationDescription];
+
+        
         locationPhoto = [[UIImageView alloc] initWithFrame:CGRectMake(0, 20, kPhotoWidth, kPhotoHeight)];
         locationPhoto.clipsToBounds = YES;
         locationPhoto.contentMode = UIViewContentModeScaleAspectFill;
