@@ -14,7 +14,9 @@
 
 @implementation FWCollectionViewLayout
 
-static CGFloat const kMaxDistanceForVisible = 0.1;
+static CGFloat const kMaxDistanceForHighlight = 0.1;
+static CGFloat const kMaxDistanceForVisible = 0.0625;
+static CGFloat const kMarginRight = 20;
 
 - (void)prepareLayout {
     // TODO: cache UICollectionViewLayoutAttributes objects
@@ -28,25 +30,26 @@ static CGFloat const kMaxDistanceForVisible = 0.1;
     NSArray *attributesArray = [super layoutAttributesForElementsInRect:rect];
     NSIndexPath *indexPathToHighlight = nil;
     for (UICollectionViewLayoutAttributes *layoutAttributes in attributesArray) {
-        CGFloat x0 = layoutAttributes.center.x;
-        CGFloat x1 = self.collectionView.center.x + self.collectionView.bounds.origin.x;
-        CGFloat totalWidth = self.collectionView.bounds.size.width;
-        CGFloat distancePercent = fmin(fabsf(x1 - x0), totalWidth) / totalWidth;
+        CGFloat maxWidth = self.collectionView.bounds.size.width;
+        CGFloat x0 = self.collectionView.bounds.origin.x;
+        CGFloat x1 = layoutAttributes.center.x - kMarginRight / 2.0;
+        CGFloat distance = x1 - x0;
+        CGFloat distancePercent = fabsf(distance - maxWidth / 2.0) / maxWidth / 2.0;
 
-        if (distancePercent < kMaxDistanceForVisible) {
+        if (distance > 0 && distancePercent < kMaxDistanceForVisible) {
             layoutAttributes.alpha = 1;
             layoutAttributes.transform = CGAffineTransformMakeScale(1.0, 1.0);
-            indexPathToHighlight = layoutAttributes.indexPath;
         } else {
             layoutAttributes.alpha = 1 - (distancePercent - kMaxDistanceForVisible) * 0.8;
-            CGFloat scale = 1 - (distancePercent - kMaxDistanceForVisible) * 0.5;
+            CGFloat scale = 1 - (distancePercent - kMaxDistanceForVisible) * 0.8;
             layoutAttributes.transform = CGAffineTransformMakeScale(scale, scale);
 
         }
+        if (distance > 0 && distancePercent < kMaxDistanceForHighlight) {
+            indexPathToHighlight = layoutAttributes.indexPath;
+        }
     }
-    if (indexPathToHighlight) {
-        [self.delegate collectionViewLayout:self willHighlightCellAtIndexPath:indexPathToHighlight];
-    }
+    [self.delegate collectionViewLayout:self willHighlightCellAtIndexPath:indexPathToHighlight];
     return attributesArray;
 }
 

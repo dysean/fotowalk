@@ -23,6 +23,8 @@
 @property (strong, nonatomic) NSIndexPath *highlightedIndexPath;
 
 - (IBAction)onGo:(id)sender;
+- (UILabel *)titleForItemAtIndexPath:(NSIndexPath *)indexPath;
+- (UILabel *)descriptionForItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
@@ -30,8 +32,8 @@
 
 static CGFloat const kCellWidth = 220;
 static CGFloat const kCellHeight = 220;
-static CGFloat const kPhotoWidth = 200;
-static CGFloat const kPhotoHeight = 200;
+static CGFloat const kPhotoWidth = 150;
+static CGFloat const kPhotoHeight = 150;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -109,17 +111,20 @@ static CGFloat const kPhotoHeight = 200;
         title.center = CGPointMake(kPhotoWidth / 2.0, 10);
         title.font = [UIFont systemFontOfSize:20];
         title.textColor = [UIColor whiteColor];
+        title.hidden = YES;
         [cell.contentView addSubview:title];
 
-        locationPhoto = [[UIImageView alloc] initWithFrame:CGRectMake(0, 20, kPhotoWidth, kPhotoHeight)];
+        locationPhoto = [[UIImageView alloc] initWithFrame:CGRectMake(0, 15, kPhotoWidth, kPhotoHeight)];
         locationPhoto.clipsToBounds = YES;
         locationPhoto.contentMode = UIViewContentModeScaleAspectFill;
         [cell.contentView addSubview:locationPhoto];
         
-        locationDescription = [[UILabel alloc] initWithFrame:CGRectMake(0, kPhotoHeight + 20, kPhotoWidth, 100)];
+        locationDescription = [[UILabel alloc] initWithFrame:CGRectMake(0, kPhotoHeight + 20, kPhotoWidth, kCellHeight - kPhotoHeight - 20)];
         //locationDescription.center = CGPointMake(kPhotoWidth / 2.0, 10);
         locationDescription.font = [UIFont systemFontOfSize:12];
         locationDescription.textColor = [UIColor whiteColor];
+        locationDescription.numberOfLines = 3;
+        locationDescription.lineBreakMode = NSLineBreakByWordWrapping;
         [cell.contentView addSubview:locationDescription];
         
     } else {
@@ -132,13 +137,31 @@ static CGFloat const kPhotoHeight = 200;
     title.text = location.name;
     [title sizeToFit];
     title.center = CGPointMake(kPhotoWidth / 2.0, 10);
+    title.alpha = 0;
     locationDescription.text = location.locationDescription;
-    locationDescription.numberOfLines =3;
-    locationDescription.lineBreakMode = NSLineBreakByWordWrapping;
+    locationDescription.alpha = 0;
+
     [locationDescription sizeToFit];
     [locationPhoto setImageWithURL:[NSURL URLWithString:firstPhoto.url]];
 
     return cell;
+}
+
+- (NSArray *)subviewsForItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell *cell = [self.locationsView cellForItemAtIndexPath:indexPath];
+    if (cell.contentView.subviews.count == 3) {
+        return cell.contentView.subviews;
+    }
+    NSLog(@"Houston, we have a problem!!!");
+    return nil;
+}
+
+- (UILabel *)titleForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return [self subviewsForItemAtIndexPath:indexPath][0];
+}
+
+- (UILabel *)descriptionForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return [self subviewsForItemAtIndexPath:indexPath][2];
 }
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
@@ -159,14 +182,63 @@ static CGFloat const kPhotoHeight = 200;
         return;
     }
 
+    UILabel *previousTitle;
+    UILabel *previousDescription;
+    UILabel *newTitle;
+    UILabel *newDescription;
+
     if (self.highlightedIndexPath) {
         for (id<MKAnnotation> annotationToDeselect in self.mapView.selectedAnnotations) {
             [self.mapView deselectAnnotation:annotationToDeselect animated:YES];
         }
+        previousTitle = [self titleForItemAtIndexPath:self.highlightedIndexPath];
+        previousDescription = [self descriptionForItemAtIndexPath:self.highlightedIndexPath];
     }
 
-    id<MKAnnotation> locationToSelect = self.photoWalk.locations[indexPath.section];
-    [self.mapView selectAnnotation:locationToSelect animated:YES];
+    if (indexPath != nil) {
+        newTitle = [self titleForItemAtIndexPath:indexPath];
+        newDescription = [self descriptionForItemAtIndexPath:indexPath];
+
+        id<MKAnnotation> locationToSelect = self.photoWalk.locations[indexPath.section];
+        [self.mapView selectAnnotation:locationToSelect animated:YES];
+    }
+
+    [UIView animateWithDuration:0.4 animations:^{
+        previousTitle.alpha = 0;
+        previousDescription.alpha = 0;
+        newTitle.alpha = 1;
+        newDescription.alpha = 1;
+    }];
+
+    self.highlightedIndexPath = indexPath;
+}
+
+- (Location *)currentLocation {
+    if (self.highlightedIndexPath != nil) {
+        return self.photoWalk.locations[self.highlightedIndexPath.section];
+    }
+    return nil;
+}
+
+- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
+    MKPinAnnotationView *pinView = (MKPinAnnotationView *)view;
+    pinView.pinColor = MKPinAnnotationColorRed;
+}
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    MKPinAnnotationView *pinView = (MKPinAnnotationView *)view;
+    pinView.pinColor = MKPinAnnotationColorGreen;
+}
+
+- (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation {
+    MKPinAnnotationView *annView=[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pin"];
+    if ([annotation isKindOfClass:[Location class]]) {
+        Location *currentAnnotation = (Location *) annotation;
+        if ([currentAnnotation isEqual:self.currentLocation]) {
+            annView.pinColor = MKPinAnnotationColorGreen;
+        }
+    }
+    return annView;
 }
 
 - (void)didReceiveMemoryWarning {
